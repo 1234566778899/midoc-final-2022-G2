@@ -21,3 +21,11 @@
     color: white;
     text-decoration: none;
 }
+
+.enlace:hover{
+    background-color: rgb(37, 47, 105);
+}
+
+.logo{
+    width: 37px;
+}

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-azul fs-6">
     <div class="container">
-        <a class="navbar-brand fw-bolder">Mi DocVirtual</a>
+        <a class="navbar-brand" routerLink="/landing"> <img src="../../../assets/logo2.svg" alt="logo" class="logo"> Mi DocVirtual</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,19 +8,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/inventario/{{id}}">Inventario</a>
+                    <a class="nav-link active btn enlace" routerLink="/inventario/{{id}}">Inventario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active">Finanzas</a>
+                    <a class="nav-link active btn enlace">Finanzas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/ventas/{{id}}">Ventas</a>
+                    <a class="nav-link active btn enlace" routerLink="/ventas/{{id}}">Ventas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/clientes/{{id}}">Clientes</a>
+                    <a class="nav-link active btn enlace" routerLink="/clientes/{{id}}">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/compras/{{id}}">Compras</a>
+                    <a class="nav-link active btn enlace" routerLink="/compras/{{id}}">Compras</a>
                 </li>
 
             </ul>
@@ -54,7 +54,7 @@
 
                     </mat-card>
                 </div>
-                <a routerLink="/perfil/{{id}}" class="btn-perfil">
+                <a routerLink="/perfil/{{id}}" class="btn-perfil btn enlace">
                     <i class="fa-solid fa-user me-2"></i>
                     <span *ngIf="farmacia" else #elseBlock>{{farmacia.NombreTitular}}</span>
                     <ng-template elseBlock><span>Administrador</span> </ng-template>
