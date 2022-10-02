@@ -1,0 +1,23 @@
+.bg-azul{
+    background-color: rgb(63, 81, 181);
+}
+
+.notify{
+    float: left;
+    width: 250px;
+    position: absolute;
+    color: black;
+    z-index: 1;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.notify-item:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btn-perfil{
+    color: white;
+    text-decoration: none;
+}

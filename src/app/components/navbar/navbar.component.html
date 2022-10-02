@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-azul fs-6">
+    <div class="container">
+        <a class="navbar-brand fw-bolder">Mi DocVirtual</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/inventario/{{id}}">Inventario</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active">Finanzas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/ventas/{{id}}">Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/clientes/{{id}}">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/compras/{{id}}">Compras</a>
+                </li>
+
+            </ul>
+            <div class="text-white">
+                <div class="d-inline-block">
+                    <i matBadge="15" class="fa-solid fa-bell me-5" matBadgeColor="warn" (click)="abrirMenu()"> </i>
+                    <mat-card class="notify" *ngIf="visible">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="fw-bolder">Notificaciones</h3>
+                            <i class="fa-solid fa-xmark" (click)="cerrarMenu()"></i>
+                        </div>
+
+                        <div class="notify-item">
+                            <p class="">El prodcuto PREDNISONA 20mg Tableta-Cápsula está por terminarse</p>
+                        </div>
+                        <div class="notify-item">
+                            <p class="">El prodcuto RATIDITINA 500mg inyectable está por terminarse</p>
+                        </div>
+                        <div class="notify-item">
+                            <p class="">El prodcuto PREDNISONA 20mg Tableta-Cápsula está por terminarse</p>
+                        </div>
+                        <div class="notify-item">
+                            <p class="">El prodcuto PREDNISONA 20mg Tableta-Cápsula está por terminarse</p>
+                        </div>
+                        <div class="notify-item">
+                            <p class="">El prodcuto PREDNISONA 20mg Tableta-Cápsula está por terminarse</p>
+                        </div>
+                        <div class="notify-item">
+                            <p class="">El prodcuto PREDNISONA 20mg Tableta-Cápsula está por terminarse</p>
+                        </div>
+
+                    </mat-card>
+                </div>
+                <a routerLink="/perfil/{{id}}" class="btn-perfil">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <span *ngIf="farmacia" else #elseBlock>{{farmacia.NombreTitular}}</span>
+                    <ng-template elseBlock><span>Administrador</span> </ng-template>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

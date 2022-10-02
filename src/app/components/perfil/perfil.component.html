@@ -1,0 +1,124 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="d-flex">
+        <i class="fa-solid fa-cart-flatbed fs-5 me-2"></i>
+        <h1>Mi Perfil</h1>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <form [formGroup]="myForm">
+                <div class="col-md-8">
+                    <p>Información del establecimiento</p>
+                    <div class="card">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Nombre farmacia</mat-label>
+                                        <input matInput placeholder="" #input formControlName="nombreFarmacia">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>RUC</mat-label>
+                                        <input matInput placeholder="" #input formControlName="ruc">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Departamento</mat-label>
+                                        <input matInput placeholder="" #input formControlName="departamento">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Provincia</mat-label>
+                                        <input matInput placeholder="" #input formControlName="provincia">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Distrito</mat-label>
+                                        <input matInput placeholder="" #input formControlName="distrito">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <p>Información de representante</p>
+                    <div class="card">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="" #input formControlName="nombre">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Apellido</mat-label>
+                                        <input matInput placeholder="" #input formControlName="apellido">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <p>Información de contacto</p>
+                    <div class="card">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Telefono</mat-label>
+                                        <input matInput placeholder="" #input formControlName="telefono">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Correo</mat-label>
+                                        <input matInput placeholder="" #input formControlName="correo">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <p>Cambiar contraseña</p>
+                    <div class="card">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Contraseña actual</mat-label>
+                                        <input matInput placeholder="" #input formControlName="password">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard" class="w-100">
+                                        <mat-label>Nueva contraseña</mat-label>
+                                        <input matInput placeholder="" #input formControlName="confPassword">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <button mat-raised-button color="warn">Cancelar</button>
+                        <button mat-raised-button color="primary">Guardar</button>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </form>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+</div>
