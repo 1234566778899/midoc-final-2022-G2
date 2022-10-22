@@ -1,3 +1,4 @@
+import { PruebasComponent } from './components/pruebas/pruebas.component';
 import { RestaurePasswordComponent } from './components/restaure-password/restaure-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: "registrar", component: RegistrarComponent },
   { path: "restaure-password", component: RestaurePasswordComponent },
+  { path: "pruebas", component: PruebasComponent },
   { path: "**", component: LandingComponent },
 ];
 

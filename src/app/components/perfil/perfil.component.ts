@@ -32,14 +32,14 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarDatos() {
-    this.myForm.get('nombreFarmacia')?.setValue(this.farmacia.nombre);
-    this.myForm.get('ruc')?.setValue(this.farmacia.RUC);
-    this.myForm.get('departamento')?.setValue(this.farmacia.Departamento);
-    this.myForm.get('provincia')?.setValue(this.farmacia.Provincia);
-    this.myForm.get('distrito')?.setValue(this.farmacia.Distrito);
-    this.myForm.get('nombre')?.setValue(this.farmacia.NombreTitular);
-    this.myForm.get('apellido')?.setValue(this.farmacia.ApellidoTitular);
-    this.myForm.get('telefono')?.setValue(this.farmacia.Telefono);
+    this.myForm.get('nombreFarmacia')?.setValue(this.farmacia.nombreFarmacia);
+    this.myForm.get('ruc')?.setValue(this.farmacia.ruc);
+    this.myForm.get('departamento')?.setValue(this.farmacia.departamento);
+    this.myForm.get('provincia')?.setValue(this.farmacia.provincia);
+    this.myForm.get('distrito')?.setValue(this.farmacia.distrito);
+    this.myForm.get('nombre')?.setValue(this.farmacia.nombre);
+    this.myForm.get('apellido')?.setValue(this.farmacia.apellido);
+    this.myForm.get('telefono')?.setValue(this.farmacia.telefono);
     this.myForm.get('correo')?.setValue(this.farmacia.correo);
   }
   reactiveForm() {

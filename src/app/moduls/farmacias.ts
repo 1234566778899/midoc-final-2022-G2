@@ -1,13 +1,14 @@
 export interface Farmacia {
     id: number;
+    nombreFarmacia: string;
+    ruc: string;
+    distrito: string;
+    provincia: string;
+    departamento: string;
+    apellido: string;
+    dni: string,
     nombre: string;
-    RUC: string;
-    Distrito: string;
-    Provincia: string;
-    Departamento: string;
-    ApellidoTitular:string;
-    NombreTitular:string;
-    Telefono: string;
-    correo:string;
+    telefono: string;
+    correo: string;
     password: string;
 }

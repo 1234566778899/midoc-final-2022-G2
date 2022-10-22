@@ -41,15 +41,16 @@ export class RegistrarComponent implements OnInit {
   AddFarmacia(): void {
     const farmacia: Farmacia = {
       id: 0,
-      nombre: this.myForm.get("name_Farmacia")!.value,
-      RUC: this.myForm.get("RUC")!.value,
-      Departamento: this.myForm.get("Departamento")!.value,
-      Provincia: this.myForm.get("Provincia")!.value,
-      Distrito: this.myForm.get("Distrito")!.value,
-      ApellidoTitular: this.myForm.get("Apellidos")!.value,
-      NombreTitular: this.myForm.get("Nombres")!.value,
-      Telefono: this.myForm.get("Telefono")!.value,
+      nombreFarmacia: this.myForm.get("name_Farmacia")!.value,
+      ruc: this.myForm.get("RUC")!.value,
+      departamento: this.myForm.get("Departamento")!.value,
+      provincia: this.myForm.get("Provincia")!.value,
+      distrito: this.myForm.get("Distrito")!.value,
+      apellido: this.myForm.get("Apellidos")!.value,
+      nombre: this.myForm.get("Nombres")!.value,
+      telefono: this.myForm.get("Telefono")!.value,
       correo: this.myForm.get("email")!.value,
+      dni:this.myForm.get('dni')?.value,
       password: this.myForm.get("Password")!.value,
     }
     this.farmaciaService.addFarmacia(farmacia).subscribe({

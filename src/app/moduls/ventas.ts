@@ -1,9 +1,12 @@
+import { Farmacia } from './farmacias';
+import { Cliente } from "./cliente";
+
 export interface Venta {
     id: number,
-    id_farmacia: number,
-    id_cliente: number,
+    farmacia: Farmacia,
+    cliente: Cliente,
     fecha: Date,
     total: number,
-    numero_boleta: number,
-    forma_pago: string
+    numeroBoleta: number,
+    formaPago: string
 }

@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-4">
                             <br>
-                            <button mat-raised-button color="primary" (click)="agregarLista()"
+                            <button mat-raised-button color="primary"
                                 [disabled]="myform.invalid">Añadir a la
                                 lista</button>
                         </div>
@@ -68,8 +68,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let compra of compras">
-                        <td>{{getNombre(compra.id_producto)}}</td>
-                        <td>{{compra.precio_unidad|currency:'USD'}}</td>
+                        <td>{{getNombre(compra.producto.id)}}</td>
+                        <td>{{compra.precioUnitario|currency:'USD'}}</td>
                         <td>{{compra.cantidad}}</td>
                         <td>{{compra.total | currency:'USD'}}</td>
                         <td>
@@ -82,7 +82,7 @@
                 </tbody>
 
             </table>
-            <p *ngIf="compras.length<=0" class="text-center alert-danger text-center">Agrege productos a la lista</p>
+            <p *ngIf="compras.length<=0" class="text-center">Agregar productos a la lista</p>
         </div>
         <div class="my-4 d-flex justify-content-between">
             <div>

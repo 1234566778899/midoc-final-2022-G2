@@ -1,10 +1,11 @@
+import { Producto } from 'src/app/moduls/producto';
+import { Farmacia } from './farmacias';
 export interface Compra {
     id: number,
-    id_farmacia: number,
-    id_producto: number,
-    fecha: Date,
-    precio_unidad: number,
+    farmacia: Farmacia,
+    producto: Producto,
+    fechaCompra: Date,
+    precioUnitario: number,
     cantidad: number,
-    total: number,
-    registrado: Boolean
+    total:number
 }

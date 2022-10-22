@@ -38,7 +38,7 @@ export class InventarioComponent implements OnInit {
     this.getProductos();
     this.getStock();
     setTimeout(() => {
-      this.llenarTabla();
+     
       this.dataSource = new MatTableDataSource(this.productoStock);
       console.log(this.productoStock);
     }, 500);
@@ -51,27 +51,7 @@ export class InventarioComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  llenarTabla() {
-    for (let i = 0; i < this.productos.length; i++) {
-      for (let j = 0; j < this.stocks.length; j++) {
-        if (this.stocks[j].id_farmacia == this.id && this.stocks[j].id_producto == this.productos[i].id) {
-          let fila: ProductoStock = {
-            nombre: this.productos[i].nombre,
-            registro_sanitario: this.productos[i].registro_sanitario,
-            presentacion: this.productos[i].presentacion,
-            tipo: this.productos[i].tipo,
-            esRecetado: this.productos[i].esRecetado,
-            descripcion: this.productos[i].descripcion,
-            cantidad_unidad: this.stocks[j].cantidad_unidad,
-            precio_unitario: this.stocks[j].precio_unitario
-          }
-          this.productoStock.push(fila);
-        }
-      }
-    }
 
-    console.log(this.productoStock.length);
-  }
   loadMyForm() {
     this.myform = this.formBuilder.group({
       name: ['', Validators.required]
@@ -88,7 +68,7 @@ export class InventarioComponent implements OnInit {
   }
   getProductos() {
     this.productosService.getProductos().subscribe(
-      (data: Producto[]) => {
+      (data: any) => {
         this.productos = data;
         console.log(data);
       }

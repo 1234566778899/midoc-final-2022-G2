@@ -10,14 +10,14 @@ export class FarmaciasService {
   constructor(private http: HttpClient) { }
 
   getFarmacias() {
-    return this.http.get<Farmacia[]>('http://localhost:3000/farmacias');
+    return this.http.get<Farmacia[]>('http://localhost:8080/api/farmacias');
   }
 
   getFarmacia(id: number) {
-    return this.http.get<Farmacia>(`http://localhost:3000/farmacias/${id}`);
+    return this.http.get<Farmacia>(`http://localhost:8080/api/farmacias/${id}`);
   }
 
   addFarmacia(farmacia:Farmacia){
-    return this.http.post<Farmacia>("http://localhost:3000/farmacias",farmacia);
+    return this.http.post<Farmacia>("http://localhost:8080/api/farmacias",farmacia);
   }
 }

@@ -1,7 +1,10 @@
+import { Producto } from 'src/app/moduls/producto';
+import { Farmacia } from './farmacias';
 export interface Stock {
-    id:number,
-    id_farmacia: number,
-    id_producto: number,
-    cantidad_unidad: number,
-    precio_unitario: number
+    id: number,
+    farmacia: Farmacia,
+    producto: Producto,
+    cantidadUnitaria: number,
+    precioUnitario: number,
+    fechaVencimiento: Date
 }

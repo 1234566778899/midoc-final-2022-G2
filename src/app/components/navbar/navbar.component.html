@@ -56,7 +56,7 @@
                 </div>
                 <a routerLink="/perfil/{{id}}" class="btn-perfil btn enlace">
                     <i class="fa-solid fa-user me-2"></i>
-                    <span *ngIf="farmacia" else #elseBlock>{{farmacia.NombreTitular}}</span>
+                    <span *ngIf="farmacia" else #elseBlock>{{farmacia.nombre}}</span>
                     <ng-template elseBlock><span>Administrador</span> </ng-template>
                 </a>
             </div>

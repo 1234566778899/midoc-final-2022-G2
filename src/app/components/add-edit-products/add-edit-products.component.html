@@ -24,7 +24,7 @@
                                                 <td>{{option.nombre}}, {{option.presentacion}},  Unid: </td>
                                                 <td>{{entontrarCompra(option.id).cantidad}}</td>
                                                 <td class="text-white">0</td>
-                                                <td>{{entontrarCompra(option.id).fecha|date: 'shortDate'}}</td>
+                                                <td></td>
                                             </tr>
                                         </mat-option>
                                     </mat-autocomplete>
@@ -95,7 +95,7 @@
         <div class="d-flex justify-content-between my-3">
             <button mat-raised-button color="warn">Cancelar</button>
             <button mat-raised-button color="primary" [disabled]="myForm.invalid"
-                (click)="agregarStock()">Añadir</button>
+                >Añadir</button>
         </div>
     </form>
     <br>

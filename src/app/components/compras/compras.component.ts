@@ -17,14 +17,14 @@ export class ComprasComponent implements OnInit {
 
   myControl = new FormControl('');
   options: Producto[] = [];
-  filteredOptions!: Observable<Producto[]>;
+  filteredOptions!: Observable<any>;
   idFarmacia!: number;
   idProducto!: number;
   compras: Compra[] = [];
   myform !: FormGroup;
   constructor(private formBuilder: FormBuilder, private activated: ActivatedRoute,
     private productoService: ProductosService, private compraService: ComprasService,
-    private router:Router) {
+    private router: Router) {
 
   }
   ngOnInit() {
@@ -47,13 +47,9 @@ export class ComprasComponent implements OnInit {
         }
       })
     }
-
-    setTimeout(() => {
-      this.router.navigate([`/inventario/${this.idFarmacia}`]);
-    }, 1000);
   }
 
-  private _filter(value: string): Producto[] {
+  private _filter(value: string){
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.nombre.toLowerCase().includes(filterValue) ||
       option.presentacion.toLowerCase().includes(filterValue));
@@ -69,8 +65,9 @@ export class ComprasComponent implements OnInit {
 
   getProductos() {
     this.productoService.getProductos().subscribe(
-      (data: Producto[]) => {
-        this.options = data;
+      (data) => {
+        //this.options = data;
+        console.log('productos: ', data);
       }
     )
   }
@@ -81,28 +78,11 @@ export class ComprasComponent implements OnInit {
     }
     return 'No se encontro el producto'
   }
-  conseguirProducto(data: Producto) {
+  conseguirProducto(data: any) {
     this.idProducto = data.id;
   }
 
-  agregarLista() {
-
-    let _total: number = parseFloat(this.myform.get('cantidad')?.value) * parseFloat(this.myform.get('precio')?.value);
-    let compra: Compra = {
-      id: 0,
-      id_farmacia: this.idFarmacia,
-      id_producto: this.idProducto,
-      precio_unidad: this.myform.get('precio')?.value,
-      cantidad: this.myform.get('cantidad')?.value,
-      total: _total,
-      registrado: false,
-      fecha: this.myform.get('fecha')?.value
-    }
-    this.compras.push(compra);
-    this.myControl.setValue('');
-    this.myform.get('cantidad')?.setValue('');
-    this.myform.get('precio')?.setValue('');
-  }
+ 
 
   quitarLista(compra: Compra) {
     let indice = this.compras.indexOf(compra);

@@ -20,6 +20,7 @@ import { ValidarCodigoComponent } from './components/validar-codigo/validar-codi
 import { RegistrarComponent } from './components/registrar/registrar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RestaurePasswordComponent } from './components/restaure-password/restaure-password.component';
+import { PruebasComponent } from './components/pruebas/pruebas.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { RestaurePasswordComponent } from './components/restaure-password/restau
     ValidarCodigoComponent,
     RegistrarComponent,
     PerfilComponent,
-    RestaurePasswordComponent
+    RestaurePasswordComponent,
+    PruebasComponent
   ],
   imports: [
     BrowserModule,

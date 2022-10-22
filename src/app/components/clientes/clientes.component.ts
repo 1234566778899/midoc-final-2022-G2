@@ -31,7 +31,7 @@ export class ClientesComponent implements OnInit {
     this.getVentas();
 
     setTimeout(() => {
-      this.llenarTabla();
+  
       this.dataSource = new MatTableDataSource(this.detalleCliente);
       console.log(this.detalleCliente);
     }, 500);
@@ -57,31 +57,7 @@ export class ClientesComponent implements OnInit {
     }
     return 0;
   }
-  llenarTabla() {
-    for (let i = 0; i < this.ventas.length; i++) {
-      for (let j = 0; j < this.clientes.length; j++) {
-        if (this.ventas[i].id_farmacia == this.id_farmacia && this.ventas[i].id_cliente == this.clientes[j].id) {
-
-          if (!(this.existeClientes(this.clientes[j].id))) {
-            let detalle: DetalleCliente = {
-              id: this.clientes[j].id,
-              nombre: this.clientes[j].nombre,
-              apellido: this.clientes[j].apellido,
-              dni: this.clientes[j].dni,
-              cantidad: 1,
-              monto: this.ventas[i].total
-            }
-            this.detalleCliente.push(detalle);
-
-            console.log(this.clientes[i]);
-          } else {
-            this.detalleCliente[this.getIndice(this.clientes[j].id)].cantidad++;
-            this.detalleCliente[this.getIndice(this.clientes[j].id)].monto += this.ventas[i].total;
-          }
-        }
-      }
-    }
-  }
+  
   getClientes() {
     this.clienteService.getClientes().subscribe(
       (data: Cliente[]) => {
