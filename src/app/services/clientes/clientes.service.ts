@@ -10,7 +10,7 @@ export class ClientesService {
   constructor(private http:HttpClient) { }
 
   getClientes(){
-    return this.http.get<Cliente[]>('http://localhost:3000/clientes');
+    return this.http.get<Cliente[]>('http://localhost:8080/api/clientes');
   }
 
 }

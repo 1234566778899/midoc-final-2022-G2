@@ -12,7 +12,7 @@ export class ComprasService {
   }
 
   addCompra(compra: Compra) {
-    return this.http.post<Compra>('http://localhost:3000/compras', compra);
+    return this.http.post<Compra>('http://localhost:8080/api/compras', compra);
   }
 
   getCompras(){
