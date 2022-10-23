@@ -1,5 +1,3 @@
-import { Compra } from './../../moduls/compra';
-import { ComprasService } from './../../services/compras/compras.service';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { Stock } from './../../moduls/stock';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,15 +21,14 @@ export class AddEditProductsComponent implements OnInit {
   myForm!: FormGroup;
   idFarmacia!: number;
   idProducto!: number;
-  compras: Compra[] = [];
+  stocks: Stock[] = [];
   constructor(private productoService: ProductosService, private formBuilder: FormBuilder,
-    private activated: ActivatedRoute, private stockService: StocksService, private router: Router,
-    private comprasService: ComprasService) { }
+    private activated: ActivatedRoute, private stockService: StocksService, private router: Router) { }
 
   ngOnInit(): void {
     this.idFarmacia = this.activated.snapshot.params['id'];
     this.getProductos();
-    this.getCompras();
+    this.getStock();
 
     setTimeout(() => {
       console.log(this.options);
@@ -44,10 +41,10 @@ export class AddEditProductsComponent implements OnInit {
     this.reactiveForm();
   }
 
-  getCompras() {
-    this.comprasService.getCompras().subscribe(
-      (data: Compra[]) => {
-        this.compras = data;
+  getStock() {
+    this.stockService.getSock(this.idFarmacia).subscribe(
+      (data: Stock[]) => {
+        this.stocks = data;
       }
     )
   }
@@ -62,14 +59,14 @@ export class AddEditProductsComponent implements OnInit {
       }
     )
   }
-  entontrarCompra(id: number): Compra {
-    for (let i = 0; i < this.compras.length; i++) {
-      if (this.compras[i].producto.id == id) return this.compras[i];
+  entontrarCompra(id: number): Stock {
+    for (let i = 0; i < this.stocks.length; i++) {
+      if (this.stocks[i].producto.id == id) return this.stocks[i];
     }
-    return this.compras[0];
+    return this.stocks[0];
   }
-  
-  private _filter(value: string){
+
+  private _filter(value: string) {
 
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.nombre.toLowerCase().includes(filterValue) ||
@@ -78,7 +75,7 @@ export class AddEditProductsComponent implements OnInit {
   }
   getProductos() {
     this.productoService.getProductos().subscribe(
-      (data:any) => {
+      (data: any) => {
         this.productos = data;
       }
     )
@@ -91,7 +88,7 @@ export class AddEditProductsComponent implements OnInit {
     let condicion = document.querySelector('#condicion') as HTMLInputElement;
     let descripcion = document.querySelector('#descripcion') as HTMLInputElement;
 
-  
+
     presentacion.value = data.presentacion;
     tipo.value = data.tipo;
     fabricante.value = 'PFIZER';

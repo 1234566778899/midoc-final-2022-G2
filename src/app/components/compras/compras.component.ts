@@ -1,7 +1,7 @@
+import { StocksService } from './../../services/stocks/stocks.service';
+import { Stock } from './../../moduls/stock';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
 import { Farmacia } from './../../moduls/farmacias';
-import { ComprasService } from './../../services/compras/compras.service';
-import { Compra } from './../../moduls/compra';
 import { ProductosService } from './../../services/productos/productos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from './../../moduls/producto';
@@ -22,10 +22,10 @@ export class ComprasComponent implements OnInit {
   filteredOptions!: Observable<Producto[]>;
   farmacia!: Farmacia;
   producto!: Producto;
-  compras: Compra[] = [];
+  compras: Stock[] = [];
   myform !: FormGroup;
   constructor(private formBuilder: FormBuilder, private activated: ActivatedRoute,
-    private productoService: ProductosService, private compraService: ComprasService,
+    private productoService: ProductosService, private stockService: StocksService,
     private router: Router, private farmaciasService: FarmaciasService) {
 
   }
@@ -35,7 +35,6 @@ export class ComprasComponent implements OnInit {
     this.farmaciasService.getFarmacia(idFarmacia).subscribe(
       (data: Farmacia) => {
         this.farmacia = data;
-        console.log('farmacia: ',data);
       }
     )
     this.getProductos();
@@ -44,9 +43,9 @@ export class ComprasComponent implements OnInit {
     );
   }
 
-  enviarCompras() {
+  enviaCompras() {
     for (let i = 0; i < this.compras.length; i++) {
-      this.compraService.addCompra(this.compras[i]).subscribe({
+      this.stockService.addStock(this.compras[i]).subscribe({
         next: (data) => {
           console.log(data);
         },
@@ -56,7 +55,17 @@ export class ComprasComponent implements OnInit {
       })
     }
   }
+  enviarCompras() {
+    let promesa = new Promise((resolve, reject) => {
+      resolve(this.enviaCompras());
+    })
 
+    promesa.then(() => {
+      this.router.navigate(['inventario/' + this.farmacia.id]);
+    }).catch(e => {
+      console.log('erro promesa',e);
+    })
+  }
   private _filter(value: string) {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.nombre.toLowerCase().includes(filterValue) ||
@@ -81,13 +90,15 @@ export class ComprasComponent implements OnInit {
   addLista() {
     let _precio = this.myform.get('precio')?.value;
     let _cantidad = this.myform.get('cantidad')?.value;
-    let compra: Compra = {
+    let compra: Stock = {
       id: 0,
       producto: this.producto,
       farmacia: this.farmacia,
-      total: _precio * _cantidad,
-      precioUnitario: _precio,
-      cantidad: _cantidad,
+      inversion: _precio * _cantidad,
+      fechaVencimiento: this.myform.get('fecha')?.value,
+      precioCompra: _precio,
+      precioVenta: 0,
+      cantidadDisponible: _cantidad,
       fechaCompra: this.myform.get('fecha')?.value
     }
     this.compras.push(compra);
@@ -104,7 +115,7 @@ export class ComprasComponent implements OnInit {
 
 
 
-  quitarLista(compra: Compra) {
+  quitarLista(compra: Stock) {
     let indice = this.compras.indexOf(compra);
     this.compras.splice(indice, 1);
   }
@@ -112,7 +123,7 @@ export class ComprasComponent implements OnInit {
   getTotal() {
     let total: number = 0;
     for (let i = 0; i < this.compras.length; i++) {
-      total += this.compras[i].total;
+      total += this.compras[i].inversion;
     }
     return total;
   }

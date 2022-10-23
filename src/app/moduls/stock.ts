@@ -4,7 +4,10 @@ export interface Stock {
     id: number,
     farmacia: Farmacia,
     producto: Producto,
-    cantidadUnitaria: number,
-    precioUnitario: number,
+    cantidadDisponible: number,
+    precioVenta: number,
+    precioCompra: number,
     fechaVencimiento: Date
+    fechaCompra: Date,
+    inversion: number
 }

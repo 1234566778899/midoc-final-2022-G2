@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
   }
 
   verificarUsuario(): void {
-    console.log(this.farmacias);
     this.correo = this.myform.get('email')?.value;
     this.password = this.myform.get('password')?.value;
 

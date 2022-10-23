@@ -9,11 +9,11 @@ export class StocksService {
 
   constructor(private http: HttpClient) { }
 
-  getSock() {
-    return this.http.get<Stock[]>('http://localhost:3000/stocks');
+  getSock(idFarmacia: number) {
+    return this.http.get<Stock[]>('http://localhost:8080/api/stock/' + idFarmacia);
   }
 
   addStock(stock: Stock) {
-    return this.http.post<Stock>('http://localhost:3000/stocks', stock);
+    return this.http.post<Stock>('http://localhost:8080/api/stock', stock);
   }
 }

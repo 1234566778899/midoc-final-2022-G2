@@ -4,7 +4,8 @@
         <i class="fa-solid fa-cash-register me-3 fs-5"></i>
         <h1>Compras</h1>
     </div>
-    <div class="text-end"><button mat-raised-button color="warn" routerLink="/detalleCompras/{{farmacia.id}}">Ver compras</button></div>
+    <div class="text-end"><button mat-raised-button color="warn" routerLink="/detalleCompras/{{farmacia.id}}">Ver
+            compras</button></div>
     <div>
         <form [formGroup]="myform" autocomplete="off">
             <p>Productos</p>
@@ -26,13 +27,15 @@
 
                             <mat-form-field appearance="standard" class="w-100">
                                 <mat-label>Precio compra</mat-label>
-                                <input matInput placeholder="Escriba su nombre.." #input formControlName="precio" type="number">
+                                <input matInput placeholder="Escriba su nombre.." #input formControlName="precio"
+                                    type="number">
                             </mat-form-field>
                         </div>
                         <div class="col-md-4">
                             <mat-form-field appearance="standard" class="w-100">
                                 <mat-label>Unidades</mat-label>
-                                <input matInput placeholder="Cantidad de unidades.." #input formControlName="cantidad" type="number">
+                                <input matInput placeholder="Cantidad de unidades.." #input formControlName="cantidad"
+                                    type="number">
                             </mat-form-field>
                             <br>
                             <mat-form-field appearance="standard">
@@ -45,8 +48,8 @@
                         </div>
                         <div class="col-md-4">
                             <br>
-                            <button mat-raised-button color="primary"
-                                [disabled]="myform.invalid" (click)="addLista()">Añadir a la
+                            <button mat-raised-button color="primary" [disabled]="myform.invalid"
+                                (click)="addLista()">Añadir a la
                                 lista</button>
                         </div>
                     </div>
@@ -70,12 +73,12 @@
                 <tbody>
                     <tr *ngFor="let compra of compras">
                         <td>{{getNombre(compra.producto.id)}}</td>
-                        <td>{{compra.precioUnitario|currency:'USD'}}</td>
-                        <td>{{compra.cantidad}}</td>
-                        <td>{{compra.total | currency:'USD'}}</td>
+                        <td>{{compra.precioCompra|currency:'USD'}}</td>
+                        <td>{{compra.cantidadDisponible}}</td>
+                        <td>{{compra.inversion | currency:'USD'}}</td>
                         <td>
-                            <button mat-mini-fab color="primary"
-                             aria-label="Example icon button with a delete icon" (click)="quitarLista(compra)">
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon"
+                                (click)="quitarLista(compra)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -87,7 +90,7 @@
         </div>
         <div class="my-4 d-flex justify-content-between">
             <div>
-                <button mat-raised-button color="secondary" class="me-3">Cancelar </button>
+                <button mat-raised-button color="secondary" class="mb-2 me-3">Cancelar </button>
                 <button mat-raised-button color="primary" (click)="enviarCompras()">Registrar</button>
             </div>
             <div>
