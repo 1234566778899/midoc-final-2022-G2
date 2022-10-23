@@ -2,7 +2,7 @@ import { Farmacia } from './../../moduls/farmacias';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,19 +12,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   hide = true;
   myform!: FormGroup;
-  farmacias!: Farmacia[];
   correo!: string;
   password!: string;
   esValido!: boolean;
-
+  id!: number;
   constructor(private formBuilder: FormBuilder,
     private farmaciaService: FarmaciasService,
-    private router: Router) { }
-
+    private router: Router, private activatedRoute: ActivatedRoute) { }
+    
   ngOnInit(): void {
     this.loadMyForm();
-    this.getFarmacias();
     this.esValido = true;
+    this.id=this.activatedRoute.snapshot.params["id"];
+
   }
 
   loadMyForm() {
@@ -33,23 +33,21 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.maxLength(50)]]
     })
   }
-  getFarmacias() {
-    this.farmaciaService.getFarmacias().subscribe(
-      (data: Farmacia[]) => {
-        this.farmacias = data;
-      }
-    )
-  }
+ 
 
   verificarUsuario(): void {
     this.correo = this.myform.get('email')?.value;
     this.password = this.myform.get('password')?.value;
+    this.farmaciaService.getFarmacias().Subscribe(
+       (data: Farmacia[])=>{
+           let auxfarmacia=data.find(x=>x.correo==this.correo && x.password==this.password); 
 
-    for (let i = 0; i < this.farmacias.length; i++) {
-      if (this.farmacias[i].correo == this.correo && this.farmacias[i].password == this.password) {
-        this.router.navigate([`user/${this.farmacias[i].id}`]);
-      }
-    }
-    this.esValido = false;
+           if(auxfarmacia){
+            this.router.navigate(["user/"+ this.id ]);
+           }
+       }
+
+    );
+    
   }
 }
