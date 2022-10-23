@@ -4,6 +4,7 @@
         <i class="fa-solid fa-cash-register me-3 fs-5"></i>
         <h1>Compras</h1>
     </div>
+    <div class="text-end"><button mat-raised-button color="warn" routerLink="/detalleCompras/{{farmacia.id}}">Ver compras</button></div>
     <div>
         <form [formGroup]="myform" autocomplete="off">
             <p>Productos</p>
@@ -45,7 +46,7 @@
                         <div class="col-md-4">
                             <br>
                             <button mat-raised-button color="primary"
-                                [disabled]="myform.invalid">Añadir a la
+                                [disabled]="myform.invalid" (click)="addLista()">Añadir a la
                                 lista</button>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
                 </tbody>
 
             </table>
-            <p *ngIf="compras.length<=0" class="text-center">Agregar productos a la lista</p>
+            <p *ngIf="compras.length<=0" class="text-center">Agrega productos a la lista</p>
         </div>
         <div class="my-4 d-flex justify-content-between">
             <div>

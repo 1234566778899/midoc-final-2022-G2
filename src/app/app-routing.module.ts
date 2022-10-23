@@ -1,3 +1,5 @@
+import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
+import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
 import { PruebasComponent } from './components/pruebas/pruebas.component';
 import { RestaurePasswordComponent } from './components/restaure-password/restaure-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: "edit-product/:id/edit/id_producto", component: AddEditProductsComponent },
   { path: "clientes/:id", component: ClientesComponent },
   { path: "compras/:id", component: ComprasComponent },
+  { path: "detalleCompras/:id", component: DetalleCompraComponent },
+  { path: "detalleVentas/:id", component: DetalleVentasComponent},
   { path: "olvidar", component: OlvidarPasswordComponent },
   { path: "validar", component: ValidarCodigoComponent },
   { path: "login", component: LoginComponent },

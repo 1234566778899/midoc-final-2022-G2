@@ -21,6 +21,8 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RestaurePasswordComponent } from './components/restaure-password/restaure-password.component';
 import { PruebasComponent } from './components/pruebas/pruebas.component';
+import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
+import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { PruebasComponent } from './components/pruebas/pruebas.component';
     RegistrarComponent,
     PerfilComponent,
     RestaurePasswordComponent,
-    PruebasComponent
+    PruebasComponent,
+    DetalleCompraComponent,
+    DetalleVentasComponent
   ],
   imports: [
     BrowserModule,

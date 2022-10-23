@@ -4,6 +4,9 @@
         <i class="fa-solid fa-cash-register me-3 fs-5"></i>
         <h1>Ventas</h1>
     </div>
+    <div class="text-end">
+        <button mat-raised-button color="accent" routerLink="/detalleVentas/{{idFarmacia}}">Ver ventas</button>
+    </div>
     <div>
         <form [formGroup]="myform" autocomplete="off">
             <p>Información general</p>

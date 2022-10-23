@@ -12,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
 export class PerfilComponent implements OnInit {
 
   id!: number;
-  farmacia!: Farmacia;
   myForm!: FormGroup;
   constructor(private activated: ActivatedRoute, private farmaciaService: FarmaciasService,
     private formBuilder: FormBuilder) { }
@@ -20,27 +19,25 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activated.snapshot.params['id'];
     this.reactiveForm();
-    this.farmaciaService.getFarmacia(this.id).subscribe(
-      (data: Farmacia) => {
-        this.farmacia = data;
-      }
-    )
-
-    setTimeout(() => {
-      this.cargarDatos();
-    }, 500);
+    this.cargarDatos();
   }
 
   cargarDatos() {
-    this.myForm.get('nombreFarmacia')?.setValue(this.farmacia.nombreFarmacia);
-    this.myForm.get('ruc')?.setValue(this.farmacia.ruc);
-    this.myForm.get('departamento')?.setValue(this.farmacia.departamento);
-    this.myForm.get('provincia')?.setValue(this.farmacia.provincia);
-    this.myForm.get('distrito')?.setValue(this.farmacia.distrito);
-    this.myForm.get('nombre')?.setValue(this.farmacia.nombre);
-    this.myForm.get('apellido')?.setValue(this.farmacia.apellido);
-    this.myForm.get('telefono')?.setValue(this.farmacia.telefono);
-    this.myForm.get('correo')?.setValue(this.farmacia.correo);
+    this.farmaciaService.getFarmacia(this.id).subscribe(
+      (data: Farmacia) => {
+        console.log(data);
+        this.myForm.get('nombreFarmacia')?.setValue(data.nombreFarmacia);
+        this.myForm.get('ruc')?.setValue(data.ruc);
+        this.myForm.get('departamento')?.setValue(data.departamento);
+        this.myForm.get('provincia')?.setValue(data.provincia);
+        this.myForm.get('distrito')?.setValue(data.distrito);
+        this.myForm.get('nombre')?.setValue(data.nombre);
+        this.myForm.get('apellido')?.setValue(data.apellido);
+        this.myForm.get('telefono')?.setValue(data.telefono);
+        this.myForm.get('correo')?.setValue(data.correo);
+      }
+    )
+
   }
   reactiveForm() {
     this.myForm = this.formBuilder.group({
@@ -57,8 +54,4 @@ export class PerfilComponent implements OnInit {
       confPassword: ['']
     })
   }
-
-
-
-
 }

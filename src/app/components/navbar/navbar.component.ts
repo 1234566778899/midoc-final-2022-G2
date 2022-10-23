@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
     this.farmaciaService.getFarmacia(this.id).subscribe(
       (data: Farmacia) => {
         this.farmacia = data;
-        console.log(data);
       }
     )
 

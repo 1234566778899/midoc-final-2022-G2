@@ -1,3 +1,5 @@
+import { FarmaciasService } from './../../services/farmacias/farmacias.service';
+import { Farmacia } from './../../moduls/farmacias';
 import { ComprasService } from './../../services/compras/compras.service';
 import { Compra } from './../../moduls/compra';
 import { ProductosService } from './../../services/productos/productos.service';
@@ -17,19 +19,25 @@ export class ComprasComponent implements OnInit {
 
   myControl = new FormControl('');
   options: Producto[] = [];
-  filteredOptions!: Observable<any>;
-  idFarmacia!: number;
-  idProducto!: number;
+  filteredOptions!: Observable<Producto[]>;
+  farmacia!: Farmacia;
+  producto!: Producto;
   compras: Compra[] = [];
   myform !: FormGroup;
   constructor(private formBuilder: FormBuilder, private activated: ActivatedRoute,
     private productoService: ProductosService, private compraService: ComprasService,
-    private router: Router) {
+    private router: Router, private farmaciasService: FarmaciasService) {
 
   }
   ngOnInit() {
     this.loadMyForm();
-    this.idFarmacia = this.activated.snapshot.params['id'];
+    let idFarmacia = this.activated.snapshot.params['id'];
+    this.farmaciasService.getFarmacia(idFarmacia).subscribe(
+      (data: Farmacia) => {
+        this.farmacia = data;
+        console.log('farmacia: ',data);
+      }
+    )
     this.getProductos();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''), map(value => this._filter(value || '')),
@@ -49,7 +57,7 @@ export class ComprasComponent implements OnInit {
     }
   }
 
-  private _filter(value: string){
+  private _filter(value: string) {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.nombre.toLowerCase().includes(filterValue) ||
       option.presentacion.toLowerCase().includes(filterValue));
@@ -65,13 +73,25 @@ export class ComprasComponent implements OnInit {
 
   getProductos() {
     this.productoService.getProductos().subscribe(
-      (data) => {
-        //this.options = data;
-        console.log('productos: ', data);
+      (data: Producto[]) => {
+        this.options = data;
       }
     )
   }
-
+  addLista() {
+    let _precio = this.myform.get('precio')?.value;
+    let _cantidad = this.myform.get('cantidad')?.value;
+    let compra: Compra = {
+      id: 0,
+      producto: this.producto,
+      farmacia: this.farmacia,
+      total: _precio * _cantidad,
+      precioUnitario: _precio,
+      cantidad: _cantidad,
+      fechaCompra: this.myform.get('fecha')?.value
+    }
+    this.compras.push(compra);
+  }
   getNombre(id: number) {
     for (let i = 0; i < this.options.length; i++) {
       if (this.options[i].id == id) return this.options[i].nombre + ' ,' + this.options[i].presentacion;
@@ -79,10 +99,10 @@ export class ComprasComponent implements OnInit {
     return 'No se encontro el producto'
   }
   conseguirProducto(data: any) {
-    this.idProducto = data.id;
+    this.producto = data;
   }
 
- 
+
 
   quitarLista(compra: Compra) {
     let indice = this.compras.indexOf(compra);
