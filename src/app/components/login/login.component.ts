@@ -18,13 +18,11 @@ export class LoginComponent implements OnInit {
   id!: number;
   constructor(private formBuilder: FormBuilder,
     private farmaciaService: FarmaciasService,
-    private router: Router, private activatedRoute: ActivatedRoute) { }
-    
+    private router: Router) { }
+
   ngOnInit(): void {
     this.loadMyForm();
     this.esValido = true;
-    this.id=this.activatedRoute.snapshot.params["id"];
-
   }
 
   loadMyForm() {
@@ -33,21 +31,19 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.maxLength(50)]]
     })
   }
- 
+
 
   verificarUsuario(): void {
     this.correo = this.myform.get('email')?.value;
     this.password = this.myform.get('password')?.value;
-    this.farmaciaService.getFarmacias().Subscribe(
-       (data: Farmacia[])=>{
-           let auxfarmacia=data.find(x=>x.correo==this.correo && x.password==this.password); 
-
-           if(auxfarmacia){
-            this.router.navigate(["user/"+ this.id ]);
-           }
-       }
-
+    this.farmaciaService.getFarmacias().subscribe(
+      (data: Farmacia[]) => {
+        let auxfarmacia = data.find(x => x.correo == this.correo && x.password == this.password);
+        if (auxfarmacia) {
+          this.router.navigate(["user/" + auxfarmacia.id]);
+        }
+      }
     );
-    
+    this.esValido = false;
   }
 }

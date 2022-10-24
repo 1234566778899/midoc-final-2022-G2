@@ -7,11 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatCardModule} from '@angular/material/card';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatTableModule} from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [],
   imports: [
@@ -27,7 +28,8 @@ import {MatTableModule} from '@angular/material/table';
     MatAutocompleteModule,
     MatCardModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ], exports: [
     MatToolbarModule,
     MatIconModule,
@@ -40,7 +42,8 @@ import {MatTableModule} from '@angular/material/table';
     MatAutocompleteModule,
     MatCardModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialModule { }

@@ -10,9 +10,11 @@ export class StocksService {
   constructor(private http: HttpClient) { }
 
   getSock(idFarmacia: number) {
-    return this.http.get<Stock[]>('http://localhost:8080/api/stock/' + idFarmacia);
+    return this.http.get<Stock[]>('http://localhost:8080/api/stock/lista/' + idFarmacia);
   }
-
+  getOneStock(id: number) {
+    return this.http.get<Stock>('http://localhost:8080/api/stock/' + id);
+  }
   addStock(stock: Stock) {
     return this.http.post<Stock>('http://localhost:8080/api/stock', stock);
   }

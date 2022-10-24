@@ -24,6 +24,7 @@ export class ComprasComponent implements OnInit {
   producto!: Producto;
   compras: Stock[] = [];
   myform !: FormGroup;
+  idFarmacia!: number;
   constructor(private formBuilder: FormBuilder, private activated: ActivatedRoute,
     private productoService: ProductosService, private stockService: StocksService,
     private router: Router, private farmaciasService: FarmaciasService) {
@@ -31,8 +32,8 @@ export class ComprasComponent implements OnInit {
   }
   ngOnInit() {
     this.loadMyForm();
-    let idFarmacia = this.activated.snapshot.params['id'];
-    this.farmaciasService.getFarmacia(idFarmacia).subscribe(
+    this.idFarmacia = this.activated.snapshot.params['id'];
+    this.farmaciasService.getFarmacia(this.idFarmacia).subscribe(
       (data: Farmacia) => {
         this.farmacia = data;
       }
@@ -47,10 +48,10 @@ export class ComprasComponent implements OnInit {
     for (let i = 0; i < this.compras.length; i++) {
       this.stockService.addStock(this.compras[i]).subscribe({
         next: (data) => {
-          console.log(data);
+          console.log('Bueno: ', data);
         },
         error: e => {
-          console.log(e);
+          console.log('error al enviar: ', e);
         }
       })
     }
@@ -63,7 +64,7 @@ export class ComprasComponent implements OnInit {
     promesa.then(() => {
       this.router.navigate(['inventario/' + this.farmacia.id]);
     }).catch(e => {
-      console.log('erro promesa',e);
+      console.log('erro promesa', e);
     })
   }
   private _filter(value: string) {
@@ -101,6 +102,17 @@ export class ComprasComponent implements OnInit {
       cantidadDisponible: _cantidad,
       fechaCompra: this.myform.get('fecha')?.value
     }
+
+    //----------------//
+    this.stockService.addStock(compra).subscribe({
+      next: (data) => {
+        this.router.navigate(['inventario/' + this.idFarmacia])
+      },
+      error: e => {
+        console.log('error al enviar: ', e);
+      }
+    })
+    //-----------------//
     this.compras.push(compra);
   }
   getNombre(id: number) {

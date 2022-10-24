@@ -93,18 +93,15 @@
 }
 
 .img-main {
-    animation-name: mover;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
+    animation: mover 3s linear infinite;
 }
 
 @keyframes mover {
-    0% {
-        transform: translate(-25px, 25px);
+    0%,100% {
+        transform: translate(-15px, 15px);
     }
 
-    100% {
-        transform: translate(25px, -25px);
+    50% {
+        transform: translate(15px, -15px);
     }
 }

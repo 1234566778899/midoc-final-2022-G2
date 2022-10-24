@@ -11,7 +11,7 @@ import { AddEditProductsComponent } from './components/add-edit-products/add-edi
 import { LoginComponent } from './components/login/login.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ComprasComponent } from './components/compras/compras.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './components/landing/landing.component';
 import { NavLandingComponent } from './components/nav-landing/nav-landing.component';
@@ -53,6 +53,7 @@ import { DetalleVentasComponent } from './components/detalle-ventas/detalle-vent
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
