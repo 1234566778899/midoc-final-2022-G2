@@ -18,4 +18,8 @@ export class StocksService {
   addStock(stock: Stock) {
     return this.http.post<Stock>('http://localhost:8080/api/stock', stock);
   }
+
+  updateStock(stock: Stock) {
+    return this.http.put<Stock>('http://localhost:8080/api/stock/update', stock);
+  }
 }

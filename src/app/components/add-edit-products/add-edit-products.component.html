@@ -76,7 +76,7 @@
                             <mat-form-field appearance="standard" class="w-100">
                                 <mat-label>Unidades</mat-label>
                                 <input matInput placeholder="{{stock.cantidadDisponible}} unidades" type="number"
-                                    [disabled]="!checked" value="{{stock.cantidadDisponible}}">
+                                    [disabled]="!checked" [(ngModel)]="cantidad_disponible" required>
                             </mat-form-field>
                         </td>
                     </tr>
@@ -85,7 +85,8 @@
                         <td>
                             <mat-form-field appearance="standard">
                                 <mat-label>Fecha</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="fecha" [disabled]="!checked">
+                                <input matInput [matDatepicker]="picker" [disabled]="!checked"
+                                    [(ngModel)]="fecha_vencimiento" required>
                                 <mat-hint>MM/DD/YYYY</mat-hint>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
@@ -96,9 +97,9 @@
                         <td>Precio de venta (S/.)</td>
                         <td>
                             <mat-form-field appearance="standard" class="w-100">
-                                <mat-label>Unidades</mat-label>
+                                <mat-label>S/.</mat-label>
                                 <input matInput placeholder="S/. {{stock.precioCompra}}" type="number"
-                                    [disabled]="!checked" value="{{stock.precioVenta}}">
+                                    [disabled]="!checked" [(ngModel)]="precio_venta" required>
                             </mat-form-field>
                         </td>
                     </tr>
@@ -106,7 +107,8 @@
             </table>
             <div class="d-flex justify-content-between">
                 <button mat-raised-button routerLink="/inventario/{{idFarmacia}}">Cancelar</button>
-                <button mat-raised-button *ngIf="checked">Guardar</button>
+                <button mat-raised-button *ngIf="checked" color="accent" (click)="guardar()"
+                 [disabled]="cantidad_disponible==null || fecha_vencimiento==null|| precio_venta==null">Guardar</button>
             </div>
         </div>
     </div>

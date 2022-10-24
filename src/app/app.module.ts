@@ -23,6 +23,10 @@ import { RestaurePasswordComponent } from './components/restaure-password/restau
 import { PruebasComponent } from './components/pruebas/pruebas.component';
 import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
 import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
+import { FinanzasComponent } from './components/finanzas/finanzas.component';
+import { FinanzasResumenSemanalComponent } from './components/finanzas-resumen-semanal/finanzas-resumen-semanal.component';
+import { FinanzasGananciasComponent } from './components/finanzas-ganancias/finanzas-ganancias.component';
+import { FinanzasProductosComponent } from './components/finanzas-productos/finanzas-productos.component';
 
 
 @NgModule({
@@ -44,7 +48,11 @@ import { DetalleVentasComponent } from './components/detalle-ventas/detalle-vent
     RestaurePasswordComponent,
     PruebasComponent,
     DetalleCompraComponent,
-    DetalleVentasComponent
+    DetalleVentasComponent,
+    FinanzasComponent,
+    FinanzasResumenSemanalComponent,
+    FinanzasGananciasComponent,
+    FinanzasProductosComponent
   ],
   imports: [
     BrowserModule,

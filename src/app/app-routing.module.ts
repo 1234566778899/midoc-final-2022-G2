@@ -1,3 +1,4 @@
+import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
 import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
 import { PruebasComponent } from './components/pruebas/pruebas.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "compras/:id", component: ComprasComponent },
   { path: "detalleCompras/:id", component: DetalleCompraComponent },
   { path: "detalleVentas/:id", component: DetalleVentasComponent},
+  { path: "finanzas/:id", component: FinanzasComponent},
   { path: "olvidar", component: OlvidarPasswordComponent },
   { path: "validar", component: ValidarCodigoComponent },
   { path: "login", component: LoginComponent },

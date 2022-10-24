@@ -17,6 +17,9 @@ export class AddEditProductsComponent implements OnInit {
   checked = false;
   idFarmacia!: number;
   stock!: Stock;
+  cantidad_disponible!: number;
+  fecha_vencimiento!: Date;
+  precio_venta!: number;
   constructor(private activated: ActivatedRoute, private stockService: StocksService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,11 +28,34 @@ export class AddEditProductsComponent implements OnInit {
     this.stockService.getOneStock(id_stock).subscribe(
       (data: Stock) => {
         this.stock = data;
+        this.cantidad_disponible = data.cantidadDisponible;
+        this.fecha_vencimiento = data.fechaVencimiento;
+        this.precio_venta = data.precioVenta;
       }
     )
 
   }
 
+  guardar() {
+    let stock: Stock = {
+      id: this.stock.id,
+      farmacia: this.stock.farmacia,
+      producto: this.stock.producto,
+      fechaCompra: this.stock.fechaCompra,
+      cantidadDisponible: this.cantidad_disponible,
+      precioVenta: this.precio_venta,
+      precioCompra: this.stock.precioCompra,
+      fechaVencimiento: this.fecha_vencimiento,
+      inversion: this.stock.inversion
+    }
 
-
+    this.stockService.updateStock(stock).subscribe({
+      next: (data: Stock) => {
+        this.router.navigate(['inventario/' + this.idFarmacia]);
+      },
+      error: e => {
+        console.log('error update: ', e);
+      }
+    })
+  }
 }
