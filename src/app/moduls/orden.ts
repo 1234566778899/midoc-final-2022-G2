@@ -1,7 +1,7 @@
 import { Farmacia } from './farmacias';
 import { Cliente } from "./cliente";
 
-export interface Venta {
+export interface Orden {
     id: number,
     farmacia: Farmacia,
     cliente: Cliente,

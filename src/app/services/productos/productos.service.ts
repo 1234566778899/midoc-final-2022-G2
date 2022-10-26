@@ -7,9 +7,10 @@ import { Producto } from 'src/app/moduls/producto';
 })
 export class ProductosService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getProductos(){
+  getProductos() {
     return this.http.get<Producto[]>('http://localhost:8080/api/productos');
   }
+
 }

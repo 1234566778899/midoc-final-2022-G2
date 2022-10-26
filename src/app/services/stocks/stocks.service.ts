@@ -15,8 +15,8 @@ export class StocksService {
   getOneStock(id: number) {
     return this.http.get<Stock>('http://localhost:8080/api/stock/' + id);
   }
-  addStock(stock: Stock) {
-    return this.http.post<Stock>('http://localhost:8080/api/stock', stock);
+  addStock(stock: Stock[]) {
+    return this.http.post<Stock[]>('http://localhost:8080/api/stock', stock);
   }
 
   updateStock(stock: Stock) {

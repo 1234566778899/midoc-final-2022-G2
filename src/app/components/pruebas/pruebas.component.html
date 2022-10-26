@@ -1,4 +1,8 @@
 <div class="container">
     <br>
-    <p>R: {{result}}</p>
+    <h1>Mis pruebas</h1>
+   <ul>
+    <li *ngFor="let producto of result">{{producto.nombre}}</li>
+   </ul>
+   <button mat-raised-button color="primary">Enviar datos</button>
 </div>

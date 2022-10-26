@@ -1,3 +1,4 @@
+import { BoletaComponent } from './components/boleta/boleta.component';
 import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
 import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
@@ -21,14 +22,15 @@ const routes: Routes = [
   { path: 'user/:id', component: InventarioComponent },
   { path: "ventas/:id", component: VentasComponent },
   { path: "inventario/:id", component: InventarioComponent },
-  { path: "perfil/:id", component: PerfilComponent},
+  { path: "perfil/:id", component: PerfilComponent },
   { path: "user/:id/add", component: AddEditProductsComponent },
   { path: "edit-stock/:id/:id_stock", component: AddEditProductsComponent },
   { path: "clientes/:id", component: ClientesComponent },
   { path: "compras/:id", component: ComprasComponent },
   { path: "detalleCompras/:id", component: DetalleCompraComponent },
-  { path: "detalleVentas/:id", component: DetalleVentasComponent},
-  { path: "finanzas/:id", component: FinanzasComponent},
+  { path: "detalleVentas/:id", component: DetalleVentasComponent },
+  { path: "finanzas/:id", component: FinanzasComponent },
+  { path: "boleta/:id", component: BoletaComponent },
   { path: "olvidar", component: OlvidarPasswordComponent },
   { path: "validar", component: ValidarCodigoComponent },
   { path: "login", component: LoginComponent },

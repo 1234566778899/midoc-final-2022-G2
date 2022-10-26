@@ -1,5 +1,5 @@
 export interface Consulta {
-    id:number,
+    id: number,
     nombre: string,
     correo: string,
     descripcion: string

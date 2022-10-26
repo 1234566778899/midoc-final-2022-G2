@@ -1,3 +1,4 @@
+import { Orden } from '../../moduls/orden';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { Stock } from './../../moduls/stock';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
@@ -44,27 +45,11 @@ export class ComprasComponent implements OnInit {
     );
   }
 
-  enviaCompras() {
-    for (let i = 0; i < this.compras.length; i++) {
-      this.stockService.addStock(this.compras[i]).subscribe({
-        next: (data) => {
-          console.log('Bueno: ', data);
-        },
-        error: e => {
-          console.log('error al enviar: ', e);
-        }
-      })
-    }
-  }
   enviarCompras() {
-    let promesa = new Promise((resolve, reject) => {
-      resolve(this.enviaCompras());
-    })
-
-    promesa.then(() => {
-      this.router.navigate(['inventario/' + this.farmacia.id]);
-    }).catch(e => {
-      console.log('erro promesa', e);
+    this.stockService.addStock(this.compras).subscribe({
+      next: (data: Stock[]) => {
+        this.router.navigate(['inventario/' + this.idFarmacia]);
+      }, error: e => console.log(e)
     })
   }
   private _filter(value: string) {
@@ -102,17 +87,6 @@ export class ComprasComponent implements OnInit {
       cantidadDisponible: _cantidad,
       fechaCompra: this.myform.get('fecha')?.value
     }
-
-    //----------------//
-    this.stockService.addStock(compra).subscribe({
-      next: (data) => {
-        this.router.navigate(['inventario/' + this.idFarmacia])
-      },
-      error: e => {
-        console.log('error al enviar: ', e);
-      }
-    })
-    //-----------------//
     this.compras.push(compra);
   }
   getNombre(id: number) {

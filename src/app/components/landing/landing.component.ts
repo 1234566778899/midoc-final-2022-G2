@@ -1,10 +1,9 @@
 import { Router } from '@angular/router';
 import { Consulta } from './../../moduls/consulta';
 import { ConsultasService } from './../../services/consulta/consultas.service';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -13,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class LandingComponent implements OnInit {
 
   myForm!: FormGroup;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder, private snack: MatSnackBar,
     private consultaService: ConsultasService, private router: Router) { }
 
   ngOnInit(): void {
@@ -35,11 +34,9 @@ export class LandingComponent implements OnInit {
       correo: this.myForm.get('correo')?.value,
       descripcion: this.myForm.get('descripcion')?.value
     }
-
     this.consultaService.addConsulta(consulta).subscribe({
       next: (data: Consulta) => {
-        alert('Su consulta se ha realizado con exito');
-        this.router.navigate(['/inicio']);
+        this.snack.open('Su consulta se ha enviado correctamente', 'OK', { duration: 3000 });
       },
       error: (e) => {
         console.log(e);

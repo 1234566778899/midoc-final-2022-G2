@@ -11,6 +11,6 @@ export class ConsultasService {
   constructor(private http: HttpClient) { }
 
   addConsulta(consulta: Consulta) {
-    return this.http.post<Consulta>('http://localhost:3000/consultas', consulta);
+    return this.http.post<Consulta>('http://localhost:8080/api/consultas', consulta);
   }
 }

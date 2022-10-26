@@ -1,3 +1,7 @@
 .content{
-    height: 400px;
+    height: 410px;
+}
+
+.border{
+    overflow-x: auto;
 }

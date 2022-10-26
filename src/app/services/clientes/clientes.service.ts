@@ -7,10 +7,16 @@ import { Injectable } from '@angular/core';
 })
 export class ClientesService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getClientes(){
+  getClientes() {
     return this.http.get<Cliente[]>('http://localhost:8080/api/clientes');
+  }
+  getCliente(dni: string) {
+    return this.http.get<Cliente>('http://localhost:8080/api/clientes/' + dni);
+  }
+  addCliente(cliente: Cliente) {
+    return this.http.post<Cliente>('http://localhost:8080/api/clientes', cliente);
   }
 
 }

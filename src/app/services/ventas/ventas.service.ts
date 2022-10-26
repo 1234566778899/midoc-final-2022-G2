@@ -1,4 +1,4 @@
-import { Venta } from './../../moduls/ventas';
+import { Orden } from '../../moduls/orden';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -9,11 +9,14 @@ export class VentasService {
 
   constructor(private http: HttpClient) { }
 
-  getVentas() {
-    return this.http.get<Venta[]>('http://localhost:3000/ventas');
+  getVentas(idFarmacia: number) {
+    return this.http.get<Orden[]>('http://localhost:8080/api/ordenes/' + idFarmacia);
   }
 
-  addVenta(venta: Venta) {
-    return this.http.post<Venta>('http://localhost:3000/ventas', venta);
+  addVenta(venta: Orden) {
+    return this.http.post<Orden>('http://localhost:8080/api/ordenes', venta);
+  }
+  totalIngresosEntreVenta(inicio: Date, fin: Date) {
+    return this.http.get('http://localhost:8080/api/ordenes/ingresos/' + inicio + "/" + fin);
   }
 }
