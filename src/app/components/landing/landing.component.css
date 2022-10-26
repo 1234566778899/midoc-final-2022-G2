@@ -91,6 +91,9 @@
 .inter-30 {
     line-height: 30px;
 }
+.inter-15 {
+    line-height: 20px;
+}
 
 .img-main {
     animation: mover 3s linear infinite;

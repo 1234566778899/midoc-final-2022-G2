@@ -16,7 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class InventarioComponent implements OnInit {
 
   id!: number;
-  displayedColumns: string[] = ['producto', 'tipo', 'proveedor', 'condicion', 'stock', 'disponibles', 'precio', 'accion'];
+  displayedColumns: string[] = ['producto', 'tipo', 'proveedor', 'condicion', 'stock', 'disponibles','compra', 'precio', 'accion'];
   dataSource!: MatTableDataSource<Stock>;
 
   constructor(private formBuilder: FormBuilder,

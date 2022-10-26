@@ -73,6 +73,10 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Disponibles </th>
                     <td mat-cell *matCellDef="let row" class="text-center">{{row.cantidadDisponible}}</td>
                 </ng-container>
+                <ng-container matColumnDef="compra">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Precio de compra </th>
+                    <td mat-cell *matCellDef="let row" class="text-center">S/.{{row.precioCompra}}</td>
+                </ng-container>
                 <ng-container matColumnDef="precio">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Precio de venta </th>
                     <td mat-cell *matCellDef="let row" class="text-center">S/.{{row.precioVenta}}</td>

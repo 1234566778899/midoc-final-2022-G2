@@ -19,4 +19,7 @@ export class VentasService {
   totalIngresosEntreVenta(inicio: Date, fin: Date) {
     return this.http.get('http://localhost:8080/api/ordenes/ingresos/' + inicio + "/" + fin);
   }
+  cantidadVentasEntreVenta(inicio: Date, fin: Date) {
+    return this.http.get('http://localhost:8080/api/ordenes/cantidad/' + inicio + "/" + fin);
+  }
 }

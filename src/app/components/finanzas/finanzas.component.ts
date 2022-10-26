@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinanzasComponent implements OnInit {
   total: number = 0;
+  cantidad: number = 0;
   url = '';
   constructor(private ordenService: VentasService) { }
 
@@ -18,12 +19,17 @@ export class FinanzasComponent implements OnInit {
     f2.setDate(f2.getDate() + 1);
 
     this.url = 'http://localhost:8080/api/ordenes/ingresos/' + f1 + '/' + f2;
-   
+
 
     this.ordenService.totalIngresosEntreVenta(f1, f2).subscribe(
       (data: any) => {
         this.total = data;
-        console.log(data);
+      }
+    )
+
+    this.ordenService.cantidadVentasEntreVenta(f1, f2).subscribe(
+      (data: any) => {
+        this.cantidad = data;
       }
     )
 
