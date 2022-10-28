@@ -1,12 +1,15 @@
-import { ProductoStock } from './../../moduls/ProductoStock';
+import { ActivatedRoute } from '@angular/router';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { Stock } from './../../moduls/stock';
-import { ProductosService } from './../../services/productos/productos.service';
+import { FarmaciasService } from './../../services/farmacias/farmacias.service';
+import { Farmacia } from './../../moduls/farmacias';
 import { Producto } from './../../moduls/producto';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProductosService } from './../../services/productos/productos.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inventario',
@@ -15,29 +18,62 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class InventarioComponent implements OnInit {
 
-  id!: number;
-  displayedColumns: string[] = ['producto', 'tipo', 'proveedor', 'condicion', 'stock', 'disponibles','compra', 'precio', 'accion'];
+  displayedColumns: string[] = ['producto','presentacion', 'tipo', 'proveedor', 'recetado', 'cantidad', 'compra', 'venta', 'edit', 'delete'];
   dataSource!: MatTableDataSource<Stock>;
+  stock: Stock[] = [];
+  idFarmacia!: number;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  constructor(private formBuilder: FormBuilder,
-    private activetedRoute: ActivatedRoute,
-    private stockService: StocksService) { }
+  constructor(private stockService: StocksService, private activated: ActivatedRoute) { }
 
 
-  ngOnInit(): void {
-    this.id = this.activetedRoute.snapshot.params['id'];
-    this.getStock();
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  getStock() {
-    this.stockService.getSock(this.id).subscribe(
+  ngOnInit() {
+    this.idFarmacia = this.activated.snapshot.params['id'];
+    this.stockService.getSock(this.idFarmacia).subscribe(
       (data: Stock[]) => {
         this.dataSource = new MatTableDataSource(data);
       }
     )
+
+  }
+  AfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  eliminar() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+       Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
   }
 }

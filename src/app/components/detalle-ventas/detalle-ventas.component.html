@@ -1,17 +1,28 @@
 <app-navbar></app-navbar>
 <div class="container">
     <br>
-    <h1>Mis ventas los ultimos 7 días</h1>
+    <h1>Mis ventas los ultimos 3 días</h1>
     <br>
-    <table class="table">
+    <table class="table text-center table-striped">
         <thead>
             <tr>
-                <th>Número de boleta</th>
-                <th>Forma de pago</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Acción</th>
+                <td>N°</td>
+                <td>NÚMERO DE BOLETA</td>
+                <td>FORMA DE PAGO</td>
+                <td>FECHA</td>
+                <td>TOTAL</td>
+                <td>ELIMINAR</td>
             </tr>
         </thead>
+        <tbody>
+            <tr *ngFor="let orden of ordenes; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{orden.numeroBoleta}}</td>
+                <td>{{orden.formaPago}}</td>
+                <td>{{orden.fecha|date:'shortDate'}}</td>
+                <td>{{orden.total |currency:'USD'}}</td>
+                <td><button class="boton" (click)="eliminar()"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+        </tbody>
     </table>
 </div>

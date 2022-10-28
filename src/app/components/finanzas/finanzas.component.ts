@@ -18,9 +18,6 @@ export class FinanzasComponent implements OnInit {
     f1.setDate(f1.getDate() - 1);
     f2.setDate(f2.getDate() + 1);
 
-    this.url = 'http://localhost:8080/api/ordenes/ingresos/' + f1 + '/' + f2;
-
-
     this.ordenService.totalIngresosEntreVenta(f1, f2).subscribe(
       (data: any) => {
         this.total = data;

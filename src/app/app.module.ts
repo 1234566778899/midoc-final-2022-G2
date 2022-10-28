@@ -21,7 +21,6 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RestaurePasswordComponent } from './components/restaure-password/restaure-password.component';
 import { PruebasComponent } from './components/pruebas/pruebas.component';
-import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
 import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
 import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { FinanzasResumenSemanalComponent } from './components/finanzas-resumen-semanal/finanzas-resumen-semanal.component';
@@ -48,7 +47,6 @@ import { BoletaComponent } from './components/boleta/boleta.component';
     PerfilComponent,
     RestaurePasswordComponent,
     PruebasComponent,
-    DetalleCompraComponent,
     DetalleVentasComponent,
     FinanzasComponent,
     FinanzasResumenSemanalComponent,

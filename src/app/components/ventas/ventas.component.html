@@ -1,14 +1,12 @@
 <app-navbar></app-navbar>
-<div class="container mt-5">
-    <div class="d-flex">
-        <i class="fa-solid fa-cash-register me-3 fs-5"></i>
-        <h1>Ventas</h1>
-    </div>
-    <div class="text-end">
-        <button mat-raised-button color="accent" routerLink="/detalleVentas/{{idFarmacia}}">Ver ventas</button>
-    </div>
+<br>
+<div class="container">
+    <h1>VENTAS</h1>
     <div>
-        <p>Información general</p>
+        <div class="d-flex justify-content-between">
+            <span>Información general</span>
+            <button mat-raised-button color="accent" routerLink="/detalleVentas/{{idFarmacia}}">Ver ventas</button>
+        </div>
         <mat-checkbox class="example-margin" [(ngModel)]="checked">Cliente registrado</mat-checkbox>
         <form [formGroup]="myform" autocomplete="off">
             <div class="card py-4 px-2">
@@ -24,7 +22,7 @@
                                 <mat-icon>search</mat-icon>
                             </button>
                             <div *ngIf="checked && !error">Busque al cliente por su dni</div>
-                            <div *ngIf="error" class="text-danger">No se encontró al cliente</div>
+                            <div *ngIf="error && checked" class="text-danger">No se encontró al cliente</div>
                             <div *ngIf="!checked">
                                 <mat-form-field appearance="standard" class="w-100">
                                     <mat-label>Nombre del cliente</mat-label>
@@ -154,6 +152,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p class="text-center" *ngIf="detalles.length==0">Agrega productos a a lista</p>
         </div>
         <div class="my-4 d-flex justify-content-between">
             <div>
@@ -168,4 +167,4 @@
         </div>
         <br>
     </div>
-</div>
+    </div>

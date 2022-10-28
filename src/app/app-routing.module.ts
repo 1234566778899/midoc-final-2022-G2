@@ -1,7 +1,6 @@
 import { BoletaComponent } from './components/boleta/boleta.component';
 import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
-import { DetalleCompraComponent } from './components/detalle-compra/detalle-compra.component';
 import { PruebasComponent } from './components/pruebas/pruebas.component';
 import { RestaurePasswordComponent } from './components/restaure-password/restaure-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -27,7 +26,6 @@ const routes: Routes = [
   { path: "edit-stock/:id/:id_stock", component: AddEditProductsComponent },
   { path: "clientes/:id", component: ClientesComponent },
   { path: "compras/:id", component: ComprasComponent },
-  { path: "detalleCompras/:id", component: DetalleCompraComponent },
   { path: "detalleVentas/:id", component: DetalleVentasComponent },
   { path: "finanzas/:id", component: FinanzasComponent },
   { path: "boleta/:id", component: BoletaComponent },
@@ -37,7 +35,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: "registrar", component: RegistrarComponent },
   { path: "restaure-password", component: RestaurePasswordComponent },
-  { path: "pruebas", component: PruebasComponent },
+  { path: "pruebas/:id", component: PruebasComponent },
   { path: "**", component: LandingComponent },
 ];
 

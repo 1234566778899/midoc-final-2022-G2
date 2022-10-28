@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { Stock } from './../../moduls/stock';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
@@ -6,6 +7,12 @@ import { Producto } from './../../moduls/producto';
 import { ProductosService } from './../../services/productos/productos.service';
 import { Component, OnInit } from '@angular/core';
 
+import { AfterViewInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
+
 @Component({
   selector: 'app-pruebas',
   templateUrl: './pruebas.component.html',
@@ -13,27 +20,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PruebasComponent implements OnInit {
 
-  result: Producto[] = [];
-  farmacia!: Farmacia;
-  constructor(private productoService: ProductosService, private farmaciaService: FarmaciasService,
-    private stockService: StocksService) { }
+  displayedColumns: string[] = ['producto', 'tipo', 'proveedor', 'recetado', 'cantidad', 'compra', 'venta'];
+  dataSource!: MatTableDataSource<Stock>;
+  stock: Stock[] = [];
+  idFarmacia!: number;
 
-  ngOnInit(): void {
-    this.productoService.getProductos().subscribe(
-      (data) => {
-        console.log(data);
-        this.result = data;
-      }
-    )
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-    this.farmaciaService.getFarmacia(1).subscribe(
-      (data: Farmacia) => {
-        console.log(data);
-        this.farmacia = data;
-      }
-    )
+  constructor(private stockService: StocksService, private activated: ActivatedRoute) {
   }
+  ngOnInit() {
+    this.idFarmacia = this.activated.snapshot.params['id'];
+    this.stockService.getSock(this.idFarmacia).subscribe(
+      (data: Stock[]) => {
+        this.dataSource = new MatTableDataSource(data);
+      }
+    )
+    
+  }
+  AfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-
-
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
+

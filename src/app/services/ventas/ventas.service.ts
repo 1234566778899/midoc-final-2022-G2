@@ -22,4 +22,8 @@ export class VentasService {
   cantidadVentasEntreVenta(inicio: Date, fin: Date) {
     return this.http.get('http://localhost:8080/api/ordenes/cantidad/' + inicio + "/" + fin);
   }
+
+  getUltimos3Dias(idFarmacia: number) {
+    return this.http.get<Orden[]>('http://localhost:8080/api/ordenes/ultimos/' + idFarmacia);
+  }
 }

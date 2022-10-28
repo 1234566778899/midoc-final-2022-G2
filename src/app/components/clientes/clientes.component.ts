@@ -16,16 +16,23 @@ export class ClientesComponent implements OnInit {
 
 
   displayedColumns: string[] = ['dni', 'nombre', 'apellido', 'numero', 'monto', 'quitar'];
-  clientes: Cliente[] = [];
-  ventas: Orden[] = [];
+  clientes: any[] = [];
   id_farmacia!: number;
   constructor(private clienteService: ClientesService,
-    private ventasService: VentasService,
-    private activated: ActivatedRoute) { }
+   private activated: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id_farmacia = this.activated.snapshot.params['id'];
+    this.getClientesFrecuentes();
+  }
 
+  getClientesFrecuentes() {
+    this.clienteService.getClientesFrecuentes().subscribe(
+      (data: any[]) => {
+        this.clientes = data;
+        console.log('clientes: ',data);
+      }
+    )
   }
 
 

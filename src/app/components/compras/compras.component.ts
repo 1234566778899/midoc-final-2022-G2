@@ -1,4 +1,3 @@
-import { Orden } from '../../moduls/orden';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { Stock } from './../../moduls/stock';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
