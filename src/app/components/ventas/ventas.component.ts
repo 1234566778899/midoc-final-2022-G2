@@ -84,7 +84,9 @@ export class VentasComponent implements OnInit {
       descuento: ['0', [Validators.required, Validators.max(100), Validators.min(0)]]
     })
   }
-
+  quitarLista(indice: number) {
+    this.detalles.splice(indice, 1);
+  }
   addLista() {
     let _precio = this.myform.get('precio')?.value;
     let _descuento = this.myform.get('descuento')?.value;

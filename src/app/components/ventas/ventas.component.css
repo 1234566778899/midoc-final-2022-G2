@@ -20,3 +20,7 @@
   .tabla{
     overflow-y: auto;
   }
+
+  .fecha{
+    font-size: 13px;
+  }

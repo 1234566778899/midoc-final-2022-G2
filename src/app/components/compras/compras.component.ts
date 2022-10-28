@@ -100,8 +100,7 @@ export class ComprasComponent implements OnInit {
 
 
 
-  quitarLista(compra: Stock) {
-    let indice = this.compras.indexOf(compra);
+  quitarLista(indice: number) {
     this.compras.splice(indice, 1);
   }
 

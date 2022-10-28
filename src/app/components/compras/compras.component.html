@@ -68,14 +68,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let compra of compras">
+                <tr *ngFor="let compra of compras;let i=index">
                     <td>{{getNombre(compra.producto.id)}}</td>
                     <td>{{compra.precioCompra|currency:'USD'}}</td>
                     <td>{{compra.cantidadDisponible}}</td>
                     <td>{{compra.inversion | currency:'USD'}}</td>
                     <td>
                         <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon"
-                            (click)="quitarLista(compra)">
+                            (click)="quitarLista(i)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>

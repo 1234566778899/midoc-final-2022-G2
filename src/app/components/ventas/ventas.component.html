@@ -75,7 +75,10 @@
                                                 <mat-option *ngFor="let option of filteredOptions | async"
                                                     [value]="option.producto.nombre">
                                                     <div (click)="conseguirProducto(option)">{{option.producto.nombre}},
-                                                        {{option.producto.presentacion}}</div>
+                                                        {{option.producto.presentacion}}
+                                                        <span *ngIf="option.fechaVencimiento!=option.fechaCompra" class="fw-lighter fecha">FV:{{option.fechaVencimiento|date:'shortDate'}}</span>
+                                                        <span *ngIf="option.fechaVencimiento==option.fechaCompra" class="fw-lighter text-danger fecha">SIN FECHA DE VENCIMIENTO</span>
+                                                    </div>
                                                 </mat-option>
                                             </mat-autocomplete>
                                         </mat-form-field>
@@ -145,7 +148,7 @@
                         <td>{{detalle.descuento|currency:'USD'}}</td>
                         <td>{{detalle.subTotal|currency:'USD'}}</td>
                         <td>
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                            <button mat-mini-fab color="primary" (click)="quitarLista(i)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -167,4 +170,4 @@
         </div>
         <br>
     </div>
-    </div>
+</div>
