@@ -1,3 +1,4 @@
+import { Proveedor } from './../../moduls/proveedor';
 import { Producto } from 'src/app/moduls/producto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,10 +8,13 @@ import { Injectable } from '@angular/core';
 })
 export class ProveedoresService {
 
-  constructor(private http:HttpClient) { 
+  constructor(private http: HttpClient) {
 
   }
-  getProducto(){
-    return this.http.get<Producto[]>('http://localhost:3000/productos');
+  getProveedores() {
+    return this.http.get<Proveedor[]>('http://localhost:8080/api/proveedores');
+  }
+  addProveedor(proveedor: Proveedor) {
+    return this.http.post<Proveedor>('http://localhost:8080/api/proveedores', proveedor);
   }
 }

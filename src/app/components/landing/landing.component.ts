@@ -32,11 +32,16 @@ export class LandingComponent implements OnInit {
       id: 0,
       nombre: this.myForm.get('nombre')?.value,
       correo: this.myForm.get('correo')?.value,
-      descripcion: this.myForm.get('descripcion')?.value
+      descripcion: this.myForm.get('descripcion')?.value,
+      estado: 'PENDIENTE',
+      fecha: new Date()
     }
     this.consultaService.addConsulta(consulta).subscribe({
       next: (data: Consulta) => {
         this.snack.open('Su consulta se ha enviado correctamente', 'OK', { duration: 3000 });
+        this.myForm.get('nombre')?.setValue('');
+        this.myForm.get('correo')?.setValue('');
+        this.myForm.get('descripcion')?.setValue('');
       },
       error: (e) => {
         console.log(e);
@@ -45,7 +50,4 @@ export class LandingComponent implements OnInit {
 
 
   }
-
-
-
 }

@@ -8,4 +8,5 @@ export interface DetalleVenta {
     descuento: number,
     subTotal: number,
     cantidad: number
+    stockId: number
 }

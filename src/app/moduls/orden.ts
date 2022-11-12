@@ -1,3 +1,4 @@
+import { DetalleVenta } from './detalleVenta';
 import { Farmacia } from './farmacias';
 import { Cliente } from "./cliente";
 
@@ -8,5 +9,6 @@ export interface Orden {
     fecha: Date,
     total: number,
     numeroBoleta: number,
-    formaPago: string
+    formaPago: string,
+    detalleVentas: DetalleVenta[]
 }

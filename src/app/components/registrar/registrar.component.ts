@@ -50,8 +50,9 @@ export class RegistrarComponent implements OnInit {
       nombre: this.myForm.get("Nombres")!.value,
       telefono: this.myForm.get("Telefono")!.value,
       correo: this.myForm.get("email")!.value,
-      dni:this.myForm.get('dni')?.value,
+      dni: this.myForm.get('dni')?.value,
       password: this.myForm.get("Password")!.value,
+      activo: true
     }
     this.farmaciaService.addFarmacia(farmacia).subscribe({
       next: (data) => {

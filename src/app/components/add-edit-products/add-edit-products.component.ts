@@ -22,6 +22,7 @@ export class AddEditProductsComponent implements OnInit {
     let id_stock = this.activated.snapshot.params['id_stock'];
     this.stockService.getOneStock(id_stock).subscribe(
       (data: Stock) => {
+        console.log(this.stock);
         this.stock = data;
         this.cantidad_disponible = data.cantidadDisponible;
         this.fecha_vencimiento = data.fechaVencimiento;
@@ -43,7 +44,7 @@ export class AddEditProductsComponent implements OnInit {
       fechaVencimiento: this.fecha_vencimiento,
       inversion: this.stock.inversion
     }
-
+    console.log('sotck update: ', stock);
     this.stockService.updateStock(stock).subscribe({
       next: (data: Stock) => {
         this.router.navigate(['inventario/' + this.idFarmacia]);

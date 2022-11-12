@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Farmacia } from './../../moduls/farmacias';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   id!: number;
   constructor(private formBuilder: FormBuilder,
     private farmaciaService: FarmaciasService,
-    private router: Router) { }
+    private router: Router,
+    private snack: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadMyForm();
@@ -40,10 +42,14 @@ export class LoginComponent implements OnInit {
       (data: Farmacia[]) => {
         let auxfarmacia = data.find(x => x.correo == this.correo && x.password == this.password);
         if (auxfarmacia) {
-          this.router.navigate(["user/" + auxfarmacia.id]);
-        }
+          if (auxfarmacia.activo) {
+            this.router.navigate(["user/" + auxfarmacia.id]);
+          } else {
+            this.snack.open('El esta bloqueado', 'OK', { duration: 5000 });
+          }
+        } else this.esValido = false;
       }
     );
-    this.esValido = false;
+
   }
 }

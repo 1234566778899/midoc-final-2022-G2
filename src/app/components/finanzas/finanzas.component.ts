@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { VentasService } from './../../services/ventas/ventas.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,28 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class FinanzasComponent implements OnInit {
   total: number = 0;
   cantidad: number = 0;
+  id!: number;
   url = '';
-  constructor(private ordenService: VentasService) { }
+  constructor(private ordenService: VentasService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let f1 = new Date();
-    let f2 = new Date();
-    f1.setDate(f1.getDate() - 1);
-    f2.setDate(f2.getDate() + 1);
+    this.id = this.activatedRoute.snapshot.params['id'];
+    let inicio = new Date();
+    let fin = new Date();
 
-    this.ordenService.totalIngresosEntreVenta(f1, f2).subscribe(
-      (data: any) => {
-        this.total = data;
-      }
-    )
-
-    this.ordenService.cantidadVentasEntreVenta(f1, f2).subscribe(
-      (data: any) => {
-        this.cantidad = data;
-      }
-    )
-
-
+    console.log('id: ' + this.id);
   }
 
 }

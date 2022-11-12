@@ -5,7 +5,7 @@ import { FarmaciasService } from './../../services/farmacias/farmacias.service';
 import { Farmacia } from './../../moduls/farmacias';
 import { Producto } from './../../moduls/producto';
 import { ProductosService } from './../../services/productos/productos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -18,27 +18,31 @@ import Swal from 'sweetalert2';
 })
 export class InventarioComponent implements OnInit {
 
-  displayedColumns: string[] = ['producto','presentacion', 'tipo', 'proveedor', 'recetado', 'cantidad', 'compra', 'venta', 'edit', 'delete'];
+  displayedColumns: string[] = ['producto', 'presentacion', 'tipo', 'proveedor', 'recetado', 'cantidad', 'compra', 'venta', 'edit', 'delete'];
   dataSource!: MatTableDataSource<Stock>;
   stock: Stock[] = [];
   idFarmacia!: number;
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  //@ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private stockService: StocksService, private activated: ActivatedRoute) { }
 
 
   ngOnInit() {
     this.idFarmacia = this.activated.snapshot.params['id'];
+    this.getStocks();
+  }
+  getStocks() {
     this.stockService.getSock(this.idFarmacia).subscribe(
       (data: Stock[]) => {
         this.dataSource = new MatTableDataSource(data);
+        this.stock = data;
       }
     )
-
   }
-  AfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  // ngAfterViewInit() {
+  //   console.log(this.paginator);
+  //   this.dataSource.paginator = this.paginator;
+  // }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -47,8 +51,12 @@ export class InventarioComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  eliminar() {
+  buscarProducto(texto: string) {
+    let value = texto.toUpperCase();
+    let aux = this.stock.filter(x => x.producto.nombre.toUpperCase().includes(value));
+    this.dataSource.data = aux;
+  }
+  eliminar(id: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -59,7 +67,12 @@ export class InventarioComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-       Swal.fire(
+        this.stockService.deleteStock(id).subscribe({
+          next: () => {
+            this.getStocks();
+          }
+        })
+        Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
           'success'

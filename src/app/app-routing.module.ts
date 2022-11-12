@@ -1,3 +1,8 @@
+import { AdminProductosComponent } from './components/admin-productos/admin-productos.component';
+import { AdminConsultasComponent } from './components/admin-consultas/admin-consultas.component';
+import { Proveedor } from './moduls/proveedor';
+import { AdminFarmaciasComponent } from './components/admin-farmacias/admin-farmacias.component';
+import { AdministradorComponent } from './components/administrador/administrador.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
 import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { DetalleVentasComponent } from './components/detalle-ventas/detalle-ventas.component';
@@ -16,6 +21,7 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { VentasComponent } from './components/ventas/ventas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminProveedoresComponent } from './components/admin-proveedores/admin-proveedores.component';
 
 const routes: Routes = [
   { path: 'user/:id', component: InventarioComponent },
@@ -35,6 +41,16 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: "registrar", component: RegistrarComponent },
   { path: "restaure-password", component: RestaurePasswordComponent },
+  {
+    path: "admin", component: AdministradorComponent,
+    children: [
+      { path: 'farmacias', component: AdminFarmaciasComponent },
+      { path: 'proveedores', component: AdminProveedoresComponent },
+      { path: 'consultas', component: AdminConsultasComponent },
+      { path: 'productos', component: AdminProductosComponent },
+      { path: '', component: AdminFarmaciasComponent }
+    ]
+  },
   { path: "pruebas/:id", component: PruebasComponent },
   { path: "**", component: LandingComponent },
 ];

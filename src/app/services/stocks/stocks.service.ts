@@ -22,4 +22,11 @@ export class StocksService {
   updateStock(stock: Stock) {
     return this.http.put<Stock>('http://localhost:8080/api/stock/update', stock);
   }
+  deleteStock(id: number) {
+    return this.http.delete('http://localhost:8080/api/stock/' + id);
+  }
+
+  buscarStock(texto:string){
+    return this.http.get<Stock[]>('http://localhost:8080/api/stock/buscar/' + texto);
+  }
 }

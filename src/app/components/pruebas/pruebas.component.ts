@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { VentasService } from './../../services/ventas/ventas.service';
 import { ActivatedRoute } from '@angular/router';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { Stock } from './../../moduls/stock';
@@ -20,34 +22,23 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class PruebasComponent implements OnInit {
 
-  displayedColumns: string[] = ['producto', 'tipo', 'proveedor', 'recetado', 'cantidad', 'compra', 'venta'];
-  dataSource!: MatTableDataSource<Stock>;
-  stock: Stock[] = [];
-  idFarmacia!: number;
-
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-
-  constructor(private stockService: StocksService, private activated: ActivatedRoute) {
+  constructor(private ventasService: VentasService, private activated: ActivatedRoute) {
   }
   ngOnInit() {
-    this.idFarmacia = this.activated.snapshot.params['id'];
-    this.stockService.getSock(this.idFarmacia).subscribe(
-      (data: Stock[]) => {
-        this.dataSource = new MatTableDataSource(data);
+    let id = 1;
+    let actual = new Date();
+    let fin = new Date();
+    fin.setDate(fin.getDate() - 7);
+
+    this.ventasService.getReporteSemanal(id, fin, actual).subscribe(
+      (data: any) => {
+      
+        console.log('data: ', data);
       }
     )
-    
-  }
-  AfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+
+
   }
 }
 

@@ -27,6 +27,11 @@ import { FinanzasResumenSemanalComponent } from './components/finanzas-resumen-s
 import { FinanzasGananciasComponent } from './components/finanzas-ganancias/finanzas-ganancias.component';
 import { FinanzasProductosComponent } from './components/finanzas-productos/finanzas-productos.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
+import { AdministradorComponent } from './components/administrador/administrador.component';
+import { AdminFarmaciasComponent } from './components/admin-farmacias/admin-farmacias.component';
+import { AdminProveedoresComponent } from './components/admin-proveedores/admin-proveedores.component';
+import { AdminConsultasComponent } from './components/admin-consultas/admin-consultas.component';
+import { AdminProductosComponent } from './components/admin-productos/admin-productos.component';
 
 
 @NgModule({
@@ -52,7 +57,12 @@ import { BoletaComponent } from './components/boleta/boleta.component';
     FinanzasResumenSemanalComponent,
     FinanzasGananciasComponent,
     FinanzasProductosComponent,
-    BoletaComponent
+    BoletaComponent,
+    AdministradorComponent,
+    AdminFarmaciasComponent,
+    AdminProveedoresComponent,
+    AdminConsultasComponent,
+    AdminProductosComponent
   ],
   imports: [
     BrowserModule,

@@ -2,9 +2,7 @@ import { DetalleVentaService } from './../../services/detalle-venta/detalle-vent
 import { Stock } from './../../moduls/stock';
 import { StocksService } from './../../services/stocks/stocks.service';
 import { VentasService } from './../../services/ventas/ventas.service';
-import { ProductosService } from './../../services/productos/productos.service';
 import { DetalleVenta } from './../../moduls/detalleVenta';
-import { Producto } from './../../moduls/producto';
 import { Orden } from '../../moduls/orden';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -99,7 +97,8 @@ export class VentasComponent implements OnInit {
       precioUnitario: _precio,
       descuento: (_descuento / 100) * _precio,
       subTotal: _subtotal - ((_descuento / 100) * _precio * _cantidad),
-      cantidad: _cantidad
+      cantidad: _cantidad,
+      stockId: this.stock.id
     }
     this.detalles.push(detalle);
   }
@@ -112,7 +111,8 @@ export class VentasComponent implements OnInit {
       numeroBoleta: this.myform.get('boleta')?.value,
       total: this.total(),
       cliente: data,
-      farmacia: this.farmacia
+      farmacia: this.farmacia,
+      detalleVentas: []
     }
     this.ordenService.addVenta(orden).subscribe({
       next: (data: Orden) => {
@@ -146,6 +146,7 @@ export class VentasComponent implements OnInit {
       }
       this.clienteService.addCliente(cliente).subscribe({
         next: (data: Cliente) => {
+          console.log('cliente', data);
           this.enviar(data);
         },
         error: (e) => console.log('error cliente: ', e)

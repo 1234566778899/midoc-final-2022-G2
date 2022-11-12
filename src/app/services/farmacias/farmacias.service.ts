@@ -20,4 +20,7 @@ export class FarmaciasService {
   addFarmacia(farmacia:Farmacia){
     return this.http.post<Farmacia>("http://localhost:8080/api/farmacias",farmacia);
   }
+  updateFarmacia(farmacia:Farmacia){
+    return this.http.put<Farmacia>("http://localhost:8080/api/farmacias",farmacia);
+  }
 }
