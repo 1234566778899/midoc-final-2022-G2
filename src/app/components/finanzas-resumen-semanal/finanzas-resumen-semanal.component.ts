@@ -1,5 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
+import { VentasService } from './../../services/ventas/ventas.service';
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
+declare var arr: any[];
 @Component({
   selector: 'app-finanzas-resumen-semanal',
   templateUrl: './finanzas-resumen-semanal.component.html',
@@ -7,33 +10,38 @@ declare var google: any;
 })
 export class FinanzasResumenSemanalComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private ordenService: VentasService, private activated: ActivatedRoute) { }
   ngOnInit(): void {
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(this.drawChart);
+    let id = this.activated.snapshot.params['id'];
+    let fin = new Date();
+    fin.setDate(fin.getDate() - 7);
+    let inicio = new Date();
+    this.ordenService.getReporteSemanal(id, fin, inicio).subscribe(
+      (data: any[]) => {
+        let arr: any[] = [['Dia', 'Total(S/.)']];
+        for (let i = 0; i < data.length; i++) {
+          arr.push([new Date(data[i][0]).toLocaleDateString('es-us', { weekday: 'short' })+'-'+new Date(data[i][0]).getDate(), data[i][1]]);
+        }
+        google.charts.load('current', { 'packages': ['line'] });
+        this.buildChart(arr);
+      }
+    )
+
+  }
+  buildChart(arr: any) {
+    var func = (chart: any) => {
+      var data = new google.visualization.arrayToDataTable(arr);
+      var options = {
+        title: 'RESUMEN SEMANAL',
+        curveType: 'function',
+        legend: { position: 'top' }
+      };
+      chart().draw(data, google.charts.Line.convertOptions(options));
+    }
+
+    var chart = () => new google.charts.Line(document.getElementById('curve_chart'));
+    var callback = () => func(chart);
+    google.charts.setOnLoadCallback(callback);
   }
 
-
-
-
-  drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Year', 'Sales', 'Expenses'],
-      ['2004', 1000, 400],
-      ['2005', 1170, 460],
-      ['2006', 660, 1120],
-      ['2007', 1030, 540]
-    ]);
-
-    var options = {
-      title: 'Company Performance',
-      curveType: 'function',
-      legend: { position: 'bottom' }
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-    chart.draw(data, options);
-  }
 }

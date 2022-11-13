@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DetalleVentaService } from './../../services/detalle-venta/detalle-venta.service';
 import { Stock } from './../../moduls/stock';
 import { StocksService } from './../../services/stocks/stocks.service';
@@ -35,7 +36,7 @@ export class VentasComponent implements OnInit {
   existe = false;
   constructor(private formBuilder: FormBuilder, private activated: ActivatedRoute, private stockService: StocksService,
     private farmaciaService: FarmaciasService, private clienteService: ClientesService, private ordenService: VentasService,
-    private detalleService: DetalleVentaService, private router: Router) {
+    private detalleService: DetalleVentaService, private router: Router, private snack: MatSnackBar) {
 
   }
   ngOnInit() {
@@ -53,7 +54,7 @@ export class VentasComponent implements OnInit {
     )
   }
   getProductos() {
-    this.stockService.getSock(this.idFarmacia).subscribe(
+    this.stockService.getDisponibleParaVenta(this.idFarmacia).subscribe(
       (data: Stock[]) => {
         this.options = data;
       }
@@ -90,17 +91,23 @@ export class VentasComponent implements OnInit {
     let _descuento = this.myform.get('descuento')?.value;
     let _cantidad = this.myform.get('cantidad')?.value;
     let _subtotal = _cantidad * _precio;
-    let detalle: DetalleVenta = {
-      id: 0,
-      producto: this.stock.producto,
-      orden: this.venta,
-      precioUnitario: _precio,
-      descuento: (_descuento / 100) * _precio,
-      subTotal: _subtotal - ((_descuento / 100) * _precio * _cantidad),
-      cantidad: _cantidad,
-      stockId: this.stock.id
+
+    if (this.stock.cantidadDisponible >= _cantidad) {
+      let detalle: DetalleVenta = {
+        id: 0,
+        producto: this.stock.producto,
+        orden: this.venta,
+        precioUnitario: _precio,
+        descuento: (_descuento / 100) * _precio,
+        subTotal: _subtotal - ((_descuento / 100) * _precio * _cantidad),
+        cantidad: _cantidad,
+        stockId: this.stock.id
+      }
+      this.detalles.push(detalle);
+    } else {
+      this.snack.open('Cantidad no disponible, usted tiene: ' + this.stock.cantidadDisponible, 'OK', { duration: 5000 });
     }
-    this.detalles.push(detalle);
+
   }
 
   enviar(data: Cliente) {
@@ -120,8 +127,8 @@ export class VentasComponent implements OnInit {
           this.detalles[i].orden = data;
         }
         this.detalleService.addDetalle(this.detalles).subscribe({
-          next: (data: DetalleVenta[]) => {
-            this.router.navigate(['boleta/' + this.idFarmacia]);
+          next: (res: DetalleVenta[]) => {
+            this.router.navigate(['boleta/' + data.id + '/' + this.idFarmacia]);
           },
           error: e => console.log(e)
         })

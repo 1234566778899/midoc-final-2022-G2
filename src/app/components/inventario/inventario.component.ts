@@ -22,7 +22,6 @@ export class InventarioComponent implements OnInit {
   dataSource!: MatTableDataSource<Stock>;
   stock: Stock[] = [];
   idFarmacia!: number;
-  //@ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private stockService: StocksService, private activated: ActivatedRoute) { }
 
@@ -39,10 +38,7 @@ export class InventarioComponent implements OnInit {
       }
     )
   }
-  // ngAfterViewInit() {
-  //   console.log(this.paginator);
-  //   this.dataSource.paginator = this.paginator;
-  // }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

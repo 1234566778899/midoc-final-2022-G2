@@ -16,10 +16,19 @@ export class FinanzasComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.ventasHoy();
+  }
+
+  ventasHoy() {
     let inicio = new Date();
     let fin = new Date();
-
-    console.log('id: ' + this.id);
+    fin.setDate(fin.getDate() - 1);
+    this.ordenService.getIngresosYCantidad(this.id, fin, inicio).subscribe(
+      (data: any) => {
+        this.total = data[0];
+        this.cantidad = data[1];
+      }
+    )
   }
 
 }

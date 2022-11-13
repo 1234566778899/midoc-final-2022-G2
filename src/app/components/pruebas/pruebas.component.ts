@@ -26,14 +26,9 @@ export class PruebasComponent implements OnInit {
   }
   ngOnInit() {
     let id = 1;
-    let actual = new Date();
-    let fin = new Date();
-    fin.setDate(fin.getDate() - 7);
-
-    this.ventasService.getReporteSemanal(id, fin, actual).subscribe(
+    this.ventasService.getProductosMasVendidos(id).subscribe(
       (data: any) => {
-      
-        console.log('data: ', data);
+        console.log(data);
       }
     )
 

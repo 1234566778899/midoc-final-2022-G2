@@ -26,7 +26,7 @@ export class StocksService {
     return this.http.delete('http://localhost:8080/api/stock/' + id);
   }
 
-  buscarStock(texto:string){
-    return this.http.get<Stock[]>('http://localhost:8080/api/stock/buscar/' + texto);
+  getDisponibleParaVenta(idFarmacia: number) {
+    return this.http.get<Stock[]>('http://localhost:8080/api/stock/disponible/venta/' + idFarmacia);
   }
 }

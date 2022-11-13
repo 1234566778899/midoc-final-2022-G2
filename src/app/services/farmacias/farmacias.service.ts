@@ -23,28 +23,4 @@ export class FarmaciasService {
   updateFarmacia(farmacia:Farmacia){
     return this.http.put<Farmacia>("http://localhost:8080/api/farmacias",farmacia);
   }
-  verifyRuc(ruc:String):Boolean{
-    function ExistRuc(f:Farmacia):boolean{
-      return f.ruc==ruc;
-    }
-    this.getFarmacias().subscribe(
-      (data:Farmacia[])=>{
-        this.farmacias=data;
-      }
-    )
-    if(this.farmacias.filter(ExistRuc).length==0)return true;
-    else return false;
-  }
-  verifyCorreo(correo:String):Boolean{
-    function ExistCorreo(f:Farmacia):boolean{
-      return f.correo==correo;
-    }
-    this.getFarmacias().subscribe(
-      (data:Farmacia[])=>{
-        this.farmacias=data;
-      }
-    )
-    if(this.farmacias.filter(ExistCorreo).length==0)return true;
-    else return false;
-  }
 }

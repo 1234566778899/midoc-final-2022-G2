@@ -30,7 +30,6 @@ export class ClientesComponent implements OnInit {
     this.clienteService.getClientesFrecuentes().subscribe(
       (data: any[]) => {
         this.clientes = data;
-        console.log('clientes: ',data);
       }
     )
   }

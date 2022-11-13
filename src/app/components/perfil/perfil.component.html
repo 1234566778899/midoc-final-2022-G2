@@ -90,28 +90,9 @@
                         </div>
                     </div>
                     <br>
-                    <p>Cambiar contraseña</p>
-                    <div class="card">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <mat-form-field appearance="standard" class="w-100">
-                                        <mat-label>Contraseña actual</mat-label>
-                                        <input matInput placeholder="" #input formControlName="password">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-6">
-                                    <mat-form-field appearance="standard" class="w-100">
-                                        <mat-label>Nueva contraseña</mat-label>
-                                        <input matInput placeholder="" #input formControlName="confPassword">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="d-flex justify-content-between mt-3">
                         <button mat-raised-button color="warn">Cancelar</button>
-                        <button mat-raised-button color="primary">Guardar</button>
+                        <button mat-raised-button color="primary" (click)="updateFarmacia()">Guardar cambios</button>
                     </div>
                     <br>
                     <br>

@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { VentasService } from './../../services/ventas/ventas.service';
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
 @Component({
@@ -7,29 +9,36 @@ declare var google: any;
 })
 export class FinanzasProductosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ordenService: VentasService, private activated: ActivatedRoute) { }
 
   ngOnInit(): void {
-    google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(this.drawChart);
+
+    let idFarmacia = this.activated.snapshot.params['id'];
+    let arr = [['Producto', 'Cantidad']];
+    this.ordenService.getProductosMasVendidos(idFarmacia).subscribe(
+      (data: any) => {
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+          arr.push([data[i][1] + ' ' + data[i][2], data[i][3]])
+        }
+        console.log(arr);
+        google.charts.load("current", { packages: ["corechart"] });
+        this.buildChart(arr);
+      }
+    )
   }
+  buildChart(arr: any) {
+    var func = (chart: any) => {
+      var data = new google.visualization.arrayToDataTable(arr);
+      var options = {
+        title: 'Producto más vendidos',
+        is3D: true,
+      };
 
-  drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7]
-    ]);
-
-    var options = {
-      title: 'My Daily Activities',
-      is3D: true,
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
+      chart().draw(data, options);
+    }
+    var chart = () => new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    var callback = () => func(chart);
+    google.charts.setOnLoadCallback(callback);
   }
 }

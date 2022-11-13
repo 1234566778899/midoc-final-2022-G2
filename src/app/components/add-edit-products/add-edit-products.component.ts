@@ -22,7 +22,6 @@ export class AddEditProductsComponent implements OnInit {
     let id_stock = this.activated.snapshot.params['id_stock'];
     this.stockService.getOneStock(id_stock).subscribe(
       (data: Stock) => {
-        console.log(this.stock);
         this.stock = data;
         this.cantidad_disponible = data.cantidadDisponible;
         this.fecha_vencimiento = data.fechaVencimiento;

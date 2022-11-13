@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: "compras/:id", component: ComprasComponent },
   { path: "detalleVentas/:id", component: DetalleVentasComponent },
   { path: "finanzas/:id", component: FinanzasComponent },
-  { path: "boleta/:id", component: BoletaComponent },
+  { path: "boleta/:id_orden/:id", component: BoletaComponent },
   { path: "olvidar", component: OlvidarPasswordComponent },
   { path: "validar", component: ValidarCodigoComponent },
   { path: "login", component: LoginComponent },

@@ -55,20 +55,23 @@ export class RegistrarComponent implements OnInit {
       activo: true
     }
 
-    if(this.farmaciaService.verifyRuc(farmacia.ruc)&& this.farmaciaService.verifyCorreo(farmacia.correo)){
-      this.farmaciaService.addFarmacia(farmacia).subscribe({
-        next:(data)=>{
-          this.router.navigate(["/"]);
-        },
-        error:(e)=>{
-          console.log(e);
+    this.farmaciaService.getFarmacias().subscribe(
+      (data: Farmacia[]) => {
+        let _aux = data.find(x => x.correo == farmacia.correo || x.ruc == farmacia.ruc);
+        if (_aux) {
+          alert('EL CORREO O RUC YA ESTAN REGISTRADOS');
+        } else {
+          this.farmaciaService.addFarmacia(farmacia).subscribe({
+            next: (_data) => {
+              this.router.navigate(["/user/" + _data.id]);
+            },
+            error: (e) => {
+              console.log(e);
+            }
+          }
+          )
         }
       }
-      ) 
-    }
-    else{
-      alert("El correo o RUC ingresado ya fueron registrados");
-    }
-    
+    )
   }
 }
