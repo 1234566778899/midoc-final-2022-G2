@@ -17,6 +17,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [],
   imports: [
@@ -37,7 +39,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatDialogModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    MatBadgeModule,
+    MatProgressBarModule
   ], exports: [
     MatToolbarModule,
     MatIconModule,
@@ -55,7 +59,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatDialogModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    MatBadgeModule,
+    MatProgressBarModule
   ]
 })
 export class AngularMaterialModule { }

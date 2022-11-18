@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   correo!: string;
   password!: string;
   esValido!: boolean;
+  mensaje = false;
   id!: number;
   constructor(private formBuilder: FormBuilder,
     private farmaciaService: FarmaciasService,
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
 
 
   verificarUsuario(): void {
+    this.mensaje = true;
     this.correo = this.myform.get('email')?.value;
     this.password = this.myform.get('password')?.value;
     this.farmaciaService.getFarmacias().subscribe(
@@ -45,11 +47,11 @@ export class LoginComponent implements OnInit {
           if (auxfarmacia.activo) {
             this.router.navigate(["user/" + auxfarmacia.id]);
           } else {
-            this.snack.open('El esta bloqueado', 'OK', { duration: 5000 });
+            this.snack.open('El usuario esta bloqueado', 'OK', { duration: 5000 });
           }
         } else this.esValido = false;
       }
     );
-
+    this.mensaje = false;
   }
 }

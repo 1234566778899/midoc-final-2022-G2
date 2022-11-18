@@ -5,6 +5,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4 mt-5 py-5 px-3">
                 <mat-card>
+                    <mat-progress-bar *ngIf="mensaje" mode="indeterminate" class="mb-3"></mat-progress-bar>
                     <h1 class="text-center fw-bolder">Login</h1>
                     <div *ngIf="!esValido" class="alert alert-danger" role="alert">
                         El correo o contraseña son incorrectos

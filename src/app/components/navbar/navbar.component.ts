@@ -2,7 +2,7 @@ import { NotificacionService } from './../../services/notificacion/notificacion.
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
 import { Farmacia } from './../../moduls/farmacias';
 import { Notificacion } from './../../moduls/notificacion';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   farmacia!: Farmacia;
   notificaciones: Notificacion[] = [];
   constructor(private activetedRoute: ActivatedRoute,
-    private farmaciaService: FarmaciasService, private notificacionService: NotificacionService) { }
+    private farmaciaService: FarmaciasService, private notificacionService: NotificacionService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.activetedRoute.snapshot.params['id'];
@@ -41,6 +41,26 @@ export class NavbarComponent implements OnInit {
       (data: Notificacion[]) => {
         this.notificaciones = data;
       }
+    )
+  }
+
+  updateNotificacion(notificacion: Notificacion) {
+    let noti: Notificacion = {
+      id: notificacion.id,
+      fecha: notificacion.fecha,
+      farmaciaId: notificacion.farmaciaId,
+      visto: true,
+      mensaje: notificacion.mensaje,
+      stockId: notificacion.stockId
+    }
+    console.log(noti);
+    this.notificacionService.editNotificacion(noti).subscribe({
+      next: (data: Notificacion) => {
+        console.log('data notificacion: ',data);
+        this.router.navigate([`/edit-stock/${this.id}/${data.stockId}`])
+      },
+      error: (e) => console.log(e)
+    }
     )
   }
 

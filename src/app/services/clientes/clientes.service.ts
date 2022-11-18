@@ -19,8 +19,8 @@ export class ClientesService {
     return this.http.post<Cliente>('http://localhost:8080/api/clientes', cliente);
   }
 
-  getClientesFrecuentes() {
-    return this.http.get<any[]>('http://localhost:8080/api/clientes/frecuentes');
+  getClientesFrecuentes(idFarmacia: number) {
+    return this.http.get<any[]>('http://localhost:8080/api/clientes/frecuentes/' + idFarmacia);
   }
 
 }

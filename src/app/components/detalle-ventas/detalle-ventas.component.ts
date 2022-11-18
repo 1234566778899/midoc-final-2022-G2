@@ -16,6 +16,9 @@ export class DetalleVentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.idFarmacia = this.activated.snapshot.params['id'];
+    this.getCompras();
+  }
+  getCompras() {
     this.ordenService.getUltimos3Dias(this.idFarmacia).subscribe(
       (data: Orden[]) => {
         this.ordenes = data;
@@ -23,30 +26,37 @@ export class DetalleVentasComponent implements OnInit {
 
     )
   }
-
-  eliminar() {
+  eliminar(id: number) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: '¿Seguro que quieres eliminar?',
+      text: "Una vez eliminado no se podrá recuperar!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: 'Si, Eliminar!',
+      cancelButtonText: 'No, cancelar!',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Eliminado!',
+          'La orden ha sido eliminado',
           'success'
+        )
+
+        this.ordenService.deleteOrden(id).subscribe(
+          {
+            next: (data: any) => {
+              this.getCompras();
+            }
+          }
         )
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
         Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
+          'Cancelado',
+          'La orden no ha sido eliminado',
           'error'
         )
       }

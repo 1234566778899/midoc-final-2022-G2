@@ -12,4 +12,7 @@ export class NotificacionService {
   getNotificaciones(idFarmacia: number) {
     return this.http.get<Notificacion[]>('http://localhost:8080/api/notificaciones/' + idFarmacia);
   }
+  editNotificacion(notificacion: Notificacion) {
+    return this.http.put<Notificacion>('http://localhost:8080/api/notificaciones', notificacion);
+  }
 }

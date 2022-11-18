@@ -27,7 +27,7 @@ export class ClientesComponent implements OnInit {
   }
 
   getClientesFrecuentes() {
-    this.clienteService.getClientesFrecuentes().subscribe(
+    this.clienteService.getClientesFrecuentes(this.id_farmacia).subscribe(
       (data: any[]) => {
         this.clientes = data;
       }

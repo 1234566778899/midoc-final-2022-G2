@@ -23,16 +23,17 @@
             </ul>
             <div class="text-white text-center">
                 <div class="d-inline-block">
-                    <i matBadge="15" class="fa-solid fa-bell me-5" matBadgeColor="warn" (click)="abrirMenu()"> </i>
+                    <i matBadge="{{notificaciones.length}}" class="fa-solid fa-bell me-5 icon-notify"
+                        matBadgeColor="warn" (click)="abrirMenu()" matBadge="8" matBadgePosition="after"
+                        matBadgeColor="accent"> </i>
                     <div class="notify card p-2" *ngIf="visible">
                         <div class="d-flex justify-content-between">
                             <h3 class="fw-bolder fs-5">Notificaciones</h3>
-                            <i class="fa-solid fa-xmark icon-close" (click)="cerrarMenu()"
-                            matBadge="8" matBadgePosition="before" matBadgeColor="accent"></i>
-                            
+                            <i class="fa-solid fa-xmark icon-close" (click)="cerrarMenu()"></i>
+
                         </div>
                         <div *ngFor="let element of notificaciones" class="item">
-                            <span routerLink="/edit-stock/{{id}}/{{element.stockId}}">{{element.mensaje}}</span>
+                            <span (click)="updateNotificacion(element)">{{element.mensaje}}</span>
                         </div>
 
                     </div>

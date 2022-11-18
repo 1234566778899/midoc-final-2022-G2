@@ -8,6 +8,7 @@
             <tr>
                 <td>N°</td>
                 <td>NÚMERO DE BOLETA</td>
+                <td>CLIENTE</td>
                 <td>FORMA DE PAGO</td>
                 <td>FECHA</td>
                 <td>TOTAL</td>
@@ -18,10 +19,11 @@
             <tr *ngFor="let orden of ordenes; let i=index">
                 <td>{{i+1}}</td>
                 <td>{{orden.numeroBoleta}}</td>
+                <td>{{orden.cliente.nombre}} {{orden.cliente.apellido}}</td>
                 <td>{{orden.formaPago}}</td>
                 <td>{{orden.fecha|date:'shortDate'}}</td>
                 <td>{{orden.total |currency:'USD'}}</td>
-                <td><button class="boton" (click)="eliminar()"><i class="fa-solid fa-trash"></i></button></td>
+                <td><button class="boton" (click)="eliminar(orden.id)"><i class="fa-solid fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>

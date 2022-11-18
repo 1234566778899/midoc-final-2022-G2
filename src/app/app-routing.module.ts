@@ -36,11 +36,11 @@ const routes: Routes = [
   { path: "finanzas/:id", component: FinanzasComponent },
   { path: "boleta/:id_orden/:id", component: BoletaComponent },
   { path: "olvidar", component: OlvidarPasswordComponent },
-  { path: "validar", component: ValidarCodigoComponent },
+  { path: "validar/:correo", component: ValidarCodigoComponent },
   { path: "login", component: LoginComponent },
   { path: 'landing', component: LandingComponent },
   { path: "registrar", component: RegistrarComponent },
-  { path: "restaure-password", component: RestaurePasswordComponent },
+  { path: "restaure-password/:correo", component: RestaurePasswordComponent },
   {
     path: "admin", component: AdministradorComponent,
     children: [

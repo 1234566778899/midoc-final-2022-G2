@@ -47,3 +47,11 @@
 .logo {
     width: 37px;
 }
+
+.icon-notify{
+   padding: 5px;
+   bottom:rgb(57, 69, 137);
+}
+.icon-notify:hover{
+    color: rgb(184, 189, 37);
+}

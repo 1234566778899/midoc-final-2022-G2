@@ -4,4 +4,5 @@ export interface Notificacion {
     farmaciaId: number;
     stockId: number;
     mensaje: string;
+    visto: boolean;
 }

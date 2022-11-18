@@ -41,6 +41,7 @@ export class VentasComponent implements OnInit {
   }
   ngOnInit() {
     this.loadMyForm();
+    this.myform.get('boleta')?.setValue(this.generarCodigo());
     this.idFarmacia = this.activated.snapshot.params['id'];
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''), map(value => this._filter(value || '')),
@@ -77,7 +78,7 @@ export class VentasComponent implements OnInit {
       apellido: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
       pago: ['', [Validators.required]],
-      boleta: ['0000437', [Validators.required]],
+      boleta: ['', [Validators.required]],
       cantidad: ['', [Validators.required, Validators.min(1)]],
       precio: ['', [Validators.required]],
       descuento: ['0', [Validators.required, Validators.max(100), Validators.min(0)]]
@@ -85,6 +86,13 @@ export class VentasComponent implements OnInit {
   }
   quitarLista(indice: number) {
     this.detalles.splice(indice, 1);
+  }
+  generarCodigo() {
+    let num = '';
+    for (let i = 0; i < 7; i++) {
+      num += (Math.floor(Math.random() * 10));
+    }
+    return num;
   }
   addLista() {
     let _precio = this.myform.get('precio')?.value;

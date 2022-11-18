@@ -1,11 +1,12 @@
 import { Orden } from '../../moduls/orden';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VentasService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +36,7 @@ export class VentasService {
   }
 
   convertirNumeroTexto(num: number) {
-    return this.http.get('https://nal.azurewebsites.net/api/Nal?num=' + num);
+    return this.http.get('https://nal.azurewebsites.net/api/Nal?num='+num);
   }
   getGananciasMensuales(idFarmacia: number, inicio: Date, fin: Date) {
     return this.http.get('http://localhost:8080/api/ordenes/ganancias/mensules/' + idFarmacia + '/' + inicio + '/' + fin);

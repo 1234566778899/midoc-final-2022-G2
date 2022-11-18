@@ -12,7 +12,7 @@ export class BoletaComponent implements OnInit {
   orden!: Orden;
   idOrden!: number;
   idFarmacia!: number;
-  texto!: string;
+  texto!: any;
   constructor(private ordenService: VentasService, private activated: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,17 +23,16 @@ export class BoletaComponent implements OnInit {
         this.orden = data;
       }
     )
-    this.numeroToTexto();
+    //this.numeroToTexto();
   }
 
-  numeroToTexto() {
-    this.ordenService.convertirNumeroTexto(112).subscribe(
-      (data: any) => {
-        this.texto = data;
-        console.log(data);
-      }
-    )
-  }
+  // numeroToTexto() {
+  //   this.ordenService.convertirNumeroTexto(12).subscribe(
+  //     (data: any) => {
+  //       console.log(data.letras);
+  //     }
+  //   )
+  // }
   imprimir() {
     let botones = document.querySelector('#botones');
     botones?.remove();

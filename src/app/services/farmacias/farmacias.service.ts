@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FarmaciasService {
-  farmacias: Farmacia[]=[];
+  farmacias: Farmacia[] = [];
   constructor(private http: HttpClient) { }
 
   getFarmacias() {
@@ -17,10 +17,14 @@ export class FarmaciasService {
     return this.http.get<Farmacia>(`http://localhost:8080/api/farmacias/${id}`);
   }
 
-  addFarmacia(farmacia:Farmacia){
-    return this.http.post<Farmacia>("http://localhost:8080/api/farmacias",farmacia);
+  addFarmacia(farmacia: Farmacia) {
+    return this.http.post<Farmacia>("http://localhost:8080/api/farmacias", farmacia);
   }
-  updateFarmacia(farmacia:Farmacia){
-    return this.http.put<Farmacia>("http://localhost:8080/api/farmacias",farmacia);
+  updateFarmacia(farmacia: Farmacia) {
+    return this.http.put<Farmacia>("http://localhost:8080/api/farmacias", farmacia);
+  }
+
+  getFarmaciaByCorreo(correo: string) {
+    return this.http.get<Farmacia>('http://localhost:8080/api/farmacias/correo/' + correo);
   }
 }
