@@ -29,3 +29,6 @@ table {
         width: 70%;
     }
 }
+.contenido{
+    overflow-y: auto;
+}

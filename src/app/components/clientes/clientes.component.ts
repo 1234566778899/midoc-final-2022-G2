@@ -19,7 +19,7 @@ export class ClientesComponent implements OnInit {
   clientes: any[] = [];
   id_farmacia!: number;
   constructor(private clienteService: ClientesService,
-   private activated: ActivatedRoute) { }
+    private activated: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id_farmacia = this.activated.snapshot.params['id'];
