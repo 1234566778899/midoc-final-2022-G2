@@ -27,9 +27,9 @@
                     <span *ngIf="!far.activo">BLOQUEADO</span>
                 </td>
                 <td>
-                    <button mat-raised-button (click)="cambiarEstado(far)" *ngIf="far.activo"
+                    <button mat-raised-button (click)="cambiarEstado(far.id, far)" *ngIf="far.activo"
                         class="bg-danger text-white">BLOQUEAR</button>
-                    <button mat-raised-button (click)="cambiarEstado(far)" *ngIf="!far.activo"
+                    <button mat-raised-button (click)="cambiarEstado(far.id, far)" *ngIf="!far.activo"
                         class="bg-success text-white">HABILITAR</button>
                 </td>
             </tr>

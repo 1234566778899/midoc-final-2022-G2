@@ -52,7 +52,8 @@ export class RegistrarComponent implements OnInit {
       correo: this.myForm.get("email")!.value,
       dni: this.myForm.get('dni')?.value,
       password: this.myForm.get("Password")!.value,
-      activo: true
+      activo: true,
+      photo: null
     }
 
     this.farmaciaService.getFarmacias().subscribe(

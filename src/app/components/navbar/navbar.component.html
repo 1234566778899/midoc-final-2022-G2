@@ -39,7 +39,8 @@
                     </div>
                 </div>
                 <a routerLink="/perfil/{{id}}" class="btn-perfil btn enlace">
-                    <i class="fa-solid fa-user me-2"></i>
+                    <i  *ngIf="!imgUrl" class="fa-solid fa-user me-2"></i>
+                    <img *ngIf="imgUrl" src="{{imgUrl}}" alt="" width="30" height="30" class="me-2 img_perfil">
                     <span *ngIf="farmacia" else #elseBlock>{{farmacia.nombre}}</span>
                     <ng-template elseBlock><span>Administrador</span> </ng-template>
                 </a>

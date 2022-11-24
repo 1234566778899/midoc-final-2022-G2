@@ -23,6 +23,8 @@ export class InventarioComponent implements OnInit {
   stock: Stock[] = [];
   idFarmacia!: number;
 
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
   constructor(private stockService: StocksService, private activated: ActivatedRoute) { }
 
 
@@ -35,17 +37,13 @@ export class InventarioComponent implements OnInit {
       (data: Stock[]) => {
         this.dataSource = new MatTableDataSource(data);
         this.stock = data;
+        this.dataSource.paginator = this.paginator;
       }
     )
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
   buscarProducto(texto: string) {
     let value = texto.toUpperCase();

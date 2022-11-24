@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   id!: number;
   farmacia!: Farmacia;
   notificaciones: Notificacion[] = [];
+  imgUrl!: any;
   constructor(private activetedRoute: ActivatedRoute,
     private farmaciaService: FarmaciasService, private notificacionService: NotificacionService, private router: Router) { }
 
@@ -22,6 +23,8 @@ export class NavbarComponent implements OnInit {
     this.id = this.activetedRoute.snapshot.params['id'];
     this.farmaciaService.getFarmacia(this.id).subscribe(
       (data: Farmacia) => {
+        if (data.photo)
+          this.imgUrl = 'data:image/jpeg;base64,' + data.photo;
         this.farmacia = data;
       }
     )
@@ -56,7 +59,7 @@ export class NavbarComponent implements OnInit {
     console.log(noti);
     this.notificacionService.editNotificacion(noti).subscribe({
       next: (data: Notificacion) => {
-        console.log('data notificacion: ',data);
+        console.log('data notificacion: ', data);
         this.router.navigate([`/edit-stock/${this.id}/${data.stockId}`])
       },
       error: (e) => console.log(e)

@@ -11,5 +11,6 @@ export interface Farmacia {
     telefono: string;
     correo: string;
     password: string;
-    activo:boolean
+    activo: boolean;
+    photo: any;
 }

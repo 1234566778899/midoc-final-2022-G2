@@ -2,7 +2,6 @@ import { ActivatedRoute } from '@angular/router';
 import { VentasService } from '../../../services/ventas/ventas.service';
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
-declare var arr: any[];
 @Component({
   selector: 'app-finanzas-resumen-semanal',
   templateUrl: './finanzas-resumen-semanal.component.html',

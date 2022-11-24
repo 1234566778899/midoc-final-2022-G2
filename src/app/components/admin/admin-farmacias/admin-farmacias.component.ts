@@ -22,9 +22,9 @@ export class AdminFarmaciasComponent implements OnInit {
       }
     )
   }
-  cambiarEstado(farmacia: Farmacia) {
+  cambiarEstado(id: number, farmacia: Farmacia) {
     farmacia.activo = !farmacia.activo;
-    this.farmaciaService.updateFarmacia(farmacia).subscribe({
+    this.farmaciaService.updateFarmacia(id, farmacia).subscribe({
       next: (data: Farmacia) => {
         this.snack.open('Se ha cambiado el estado correctamente', 'OK', { duration: 5000 });
       }, error: e => console.log(e)

@@ -43,7 +43,7 @@ export class RestaurePasswordComponent implements OnInit {
     let pass2 = this.myform.get('pass2')?.value;
     if (pass1 == pass2) {
       this.farmacia.password = pass1;
-      this.farmaciaService.updateFarmacia(this.farmacia).subscribe({
+      this.farmaciaService.updateFarmacia(this.farmacia.id, this.farmacia).subscribe({
         next: (data: Farmacia) => {
           this.router.navigate(['/login']);
         }

@@ -1,9 +1,9 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Farmacia } from './../../moduls/farmacias';
 import { FarmaciasService } from './../../services/farmacias/farmacias.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ContentObserver } from '@angular/cdk/observers';
 
 @Component({
   selector: 'app-perfil',
@@ -15,8 +15,12 @@ export class PerfilComponent implements OnInit {
   id!: number;
   myForm!: FormGroup;
   farmacia!: Farmacia;
+  selectedFile!: any;
+  nameImg!: string;
+  objectURL!: any;
+  photo: any;
   constructor(private activated: ActivatedRoute, private farmaciaService: FarmaciasService,
-    private formBuilder: FormBuilder, private router: Router) { }
+    private formBuilder: FormBuilder, private router: Router, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = this.activated.snapshot.params['id'];
@@ -27,6 +31,7 @@ export class PerfilComponent implements OnInit {
   cargarDatos() {
     this.farmaciaService.getFarmacia(this.id).subscribe(
       (data: Farmacia) => {
+        if (data.photo) this.photo = 'data:image/jpeg;base64,' + data.photo;
         this.farmacia = data;
         this.myForm.get('nombreFarmacia')?.setValue(data.nombreFarmacia);
         this.myForm.get('ruc')?.setValue(data.ruc);
@@ -37,22 +42,52 @@ export class PerfilComponent implements OnInit {
         this.myForm.get('apellido')?.setValue(data.apellido);
         this.myForm.get('telefono')?.setValue(data.telefono);
         this.myForm.get('correo')?.setValue(data.correo);
+        this.myForm.get('dni')?.setValue(data.dni);
       }
     )
-
+  }
+  onChangedFile(event: any) {
+    this.selectedFile = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (e: any) {
+      let img: any = document.querySelector('#img-perfil');
+      img.src = e.target.result;
+    }
+    reader.readAsDataURL(this.selectedFile);
+  }
+  abrir(input: any) {
+    input.click();
   }
   reactiveForm() {
     this.myForm = this.formBuilder.group({
-      nombreFarmacia: [''],
-      ruc: [''],
-      departamento: [''],
-      provincia: [''],
-      distrito: [''],
-      nombre: [''],
-      apellido: [''],
-      telefono: [''],
-      correo: ['']
+      nombreFarmacia: ['', [Validators.required]],
+      ruc: ['', [Validators.required,Validators.minLength(11), Validators.maxLength(11)]],
+      departamento: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      distrito: ['', Validators.required],
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      correo: ['', [Validators.required]],
+      dni: ['', [Validators.required]],
     })
+  }
+  updatePhoto() {
+    const _data = new FormData();
+    _data.append('photo', this.selectedFile);
+    this.farmaciaService.updatePhoto(this.id, _data).subscribe({
+      next: (data: Farmacia) => {
+        this.cargarDatos();
+        this.snack.open('La ha editado la foto de perfil', 'OK', { duration: 3000 })
+        this.selectedFile = null;
+      },
+      error: e => console.log(e)
+    }
+    )
+  }
+  getImg() {
+    if (this.selectedFile != null) return this.selectedFile;
+    return this.photo;
   }
   updateFarmacia() {
     let farmacia: Farmacia = {
@@ -68,11 +103,12 @@ export class PerfilComponent implements OnInit {
       telefono: this.myForm.get('telefono')?.value,
       correo: this.farmacia.correo,
       password: this.farmacia.password,
-      activo: true
+      activo: true,
+      photo: null,
     }
-    this.farmaciaService.updateFarmacia(farmacia).subscribe({
+    this.farmaciaService.updateFarmacia(this.id, farmacia).subscribe({
       next: (data: Farmacia) => {
-        this.router.navigate(['/inventario/' + this.id]);
+        this.snack.open('Los cambios se realizaron con exito', 'OK', { duration: 3000 });
       }
     })
   }
