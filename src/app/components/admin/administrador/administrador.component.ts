@@ -4,8 +4,6 @@ import { ProductosService } from '../../../services/productos/productos.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Proveedor } from '../../../moduls/proveedor';
 import { ProveedoresService } from '../../../services/proveedores/proveedores.service';
-import { Farmacia } from '../../../moduls/farmacias';
-import { FarmaciasService } from '../../../services/farmacias/farmacias.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -23,13 +21,16 @@ export class AdministradorComponent implements OnInit {
     private formBuilder: FormBuilder, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.getProveedores();
+    this.reactiveFormProducto();
+    this.reactiveFormProveedor();
+  }
+  getProveedores() {
     this.proveedorService.getProveedores().subscribe(
       (data: Proveedor[]) => {
         this.proveedores = data;
       }
     )
-    this.reactiveFormProducto();
-    this.reactiveFormProveedor();
   }
   reactiveFormProducto() {
     this.myForm1 = this.formBuilder.group({
@@ -90,6 +91,7 @@ export class AdministradorComponent implements OnInit {
       next: (data: Producto) => {
         this.close_productos();
         this.snack.open('El producto se agregó correctamente', 'OK', { duration: 5000 });
+
       },
       error: e => console.log(e)
     })
@@ -105,6 +107,7 @@ export class AdministradorComponent implements OnInit {
 
     this.proveedorService.addProveedor(proveedor).subscribe({
       next: (data: Proveedor) => {
+        this.getProveedores();
         this.snack.open('El proveedor ' + data.nombre + ' se ha agregado correctamente', 'OK', { duration: 5000 });
         this.close_proveedor();
       },

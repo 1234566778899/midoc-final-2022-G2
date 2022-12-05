@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FarmaciasService {
-
+  url = 'http://localhost:8080/api';
   constructor(private http: HttpClient) { }
 
   getFarmacias() {
-    return this.http.get<Farmacia[]>('http://localhost:8080/api/farmacias');
+    return this.http.get<Farmacia[]>(`${this.url}/farmacias`);
   }
   getFarmacia(id: number) {
     return this.http.get<Farmacia>(`http://localhost:8080/api/farmacias/${id}`);
